@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* Easy Motion brand tokens: client white + client blue, amber only for primary actions */
+@theme {
+  --color-paper: #fefcff;
+  --color-brand: #0b2f90;
+  --color-brand-hover: #0d37a6;
+  --color-night: #071e5c;
+  --color-amber: #f5a524;
+  --color-amber-hover: #ffb43d;
+  --color-ink: #0d1a3d;
+  --color-muted: #55607e;
+  --color-tint: #eef2fb;
+  --color-line: #dbe1f0;
+  --color-sky: #cfdcff;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+}
+
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1160px;
+  padding-inline: max(20px, env(safe-area-inset-left, 0px));
+}
+
+@utility eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+:root {
+  --nav-h: 76px;
+  --overlap: 110px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

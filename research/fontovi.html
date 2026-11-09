@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Easy Motion Fontovi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+  :root { --white:#fefcff; --blue:#0b2f90; --dark:#071e5c; --amber:#f5a524; --ink:#0d1a3d; --muted:#55607e; --tint:#eef2fb; --line:#dbe1f0; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--tint); color:var(--ink); font:16px/1.6 system-ui, -apple-system, sans-serif; }
+  .page { max-width: 1160px; margin: 0 auto; padding: 48px 20px 80px; display:flex; flex-direction:column; gap:40px; }
+  header h1 { font: 600 28px/1.2 system-ui, sans-serif; margin:0 0 6px; }
+  header p { margin:0; color:var(--muted); }
+  .opt { background:var(--white); border-radius:16px; overflow:hidden; box-shadow:0 20px 50px -30px rgba(7,30,92,.35); }
+  .opt__head { display:flex; justify-content:space-between; align-items:baseline; gap:12px 24px; flex-wrap:wrap; padding:18px 28px; border-bottom:1px solid var(--line); }
+  .opt__head b { font:600 18px system-ui, sans-serif; color:var(--blue); }
+  .opt__head span { color:var(--muted); font-size:14px; font-family: system-ui, sans-serif; }
+  .opt__body { display:grid; grid-template-columns: 1.3fr 1fr; }
+  .hero { background: linear-gradient(135deg, var(--dark), var(--blue)); color:#fff; padding:44px 36px; display:flex; flex-direction:column; gap:16px; min-width:0; }
+  .eyebrow { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); }
+  .hero h2 { margin:0; font-weight:400; line-height:1.04; font-size:clamp(38px,4.6vw,58px); text-wrap:balance; }
+  .hero p { margin:0; color:rgba(255,255,255,.85); max-width:44ch; }
+  .btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+  .btn { padding:12px 20px; border-radius:8px; font-weight:600; font-size:14px; }
+  .btn--a { background:var(--amber); color:#1c1300; }
+  .btn--g { border:1px solid rgba(255,255,255,.5); }
+  .light { padding:36px; display:flex; flex-direction:column; gap:14px; min-width:0; }
+  .light h3 { margin:0; color:var(--blue); font-weight:400; font-size:34px; line-height:1.1; text-wrap:balance; }
+  .light p { margin:0; color:var(--muted); font-size:15.5px; }
+  .card { margin-top:auto; border:1px solid var(--line); border-radius:10px; padding:16px 18px; }
+  .card strong { display:block; color:var(--blue); font-size:17px; }
+  .card small { color:var(--muted); font-size:14px; }
+
+  /* 1 */ .f1 .hero h2, .f1 .light h3 { font-family:"Instrument Serif", Georgia, serif; }
+          .f1 .hero h2 em { color:#cfdcff; }
+          .f1 .opt__body { font-family:"Geist", system-ui, sans-serif; }
+  /* 2 */ .f2 .hero h2, .f2 .light h3, .f2 .card strong { font-family:"Barlow Condensed", "Arial Narrow", sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.01em; }
+          .f2 .hero h2 { font-size:clamp(42px,5.2vw,66px); line-height:.98; }
+          .f2 .hero h2 em { font-style:normal; color:var(--amber); }
+          .f2 .opt__body { font-family:"Barlow", system-ui, sans-serif; }
+  /* 3 */ .f3 .hero h2, .f3 .light h3 { font-family:"Archivo", system-ui, sans-serif; font-weight:800; font-stretch:115%; letter-spacing:-.02em; }
+          .f3 .hero h2 { font-size:clamp(34px,4.2vw,52px); }
+          .f3 .light h3 { font-size:28px; }
+          .f3 .hero h2 em { font-style:normal; color:#cfdcff; }
+          .f3 .opt__body { font-family:"Archivo", system-ui, sans-serif; font-stretch:100%; }
+  /* 4 */ .f4 .hero h2, .f4 .light h3 { font-family:"Source Serif 4", Georgia, serif; font-weight:400; }
+          .f4 .hero h2 { font-size:clamp(36px,4.2vw,52px); }
+          .f4 .hero h2 em { color:#cfdcff; }
+          .f4 .opt__body { font-family:"Source Sans 3", system-ui, sans-serif; }
+  /* 5 */ .f5 .hero h2, .f5 .light h3 { font-family:"Plus Jakarta Sans", system-ui, sans-serif; font-weight:700; letter-spacing:-.03em; }
+          .f5 .hero h2 { font-size:clamp(34px,4.2vw,52px); }
+          .f5 .light h3 { font-size:28px; }
+          .f5 .hero h2 em { font-style:normal; color:#cfdcff; }
+          .f5 .opt__body { font-family:"Plus Jakarta Sans", system-ui, sans-serif; }
+
+  @media (max-width: 820px) { .opt__body { grid-template-columns:1fr; } .hero, .light { padding:28px 22px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Fontovi za Easy Motion Recruiting</h1>
+    <p>Pet kombinacija u našim bojama, sa istim tekstom. Svi fontovi su besplatni (Google Fonts).</p>
+  </header>
+
+  <section class="opt f1">
+    <div class="opt__head"><b>1 · Instrument Serif + Geist</b><span>Trenutni. Elegantno i premium, najbliže Caffreyu.</span></div>
+    <div class="opt__body">
+      <div class="hero"><span class="eyebrow">Nashville, Tennessee</span><h2>Qualified CDL drivers. <em>Ready to roll.</em></h2><p>We connect trucking companies with verified, road-ready drivers, and help drivers find jobs worth staying in.</p><div class="btns"><span class="btn btn--a">Hire Drivers</span><span class="btn btn--g">I'm a Driver</span></div></div>
+      <div class="light"><h3>Built in Music City. Moving drivers nationwide.</h3><p>Easy Motion Recruiting is a Nashville-based team that finds, screens and places professional CDL drivers.</p><div class="card"><strong>Driver Screening</strong><small>MVR, FMCSA Clearinghouse, DOT medical card and work history.</small></div></div>
+    </div>
+  </section>
+
+  <section class="opt f2">
+    <div class="opt__head"><b>2 · Barlow Condensed + Barlow</b><span>Barlow je inspirisan američkim putnim znakovima. Snažno i „trucking“, a i dalje uredno.</span></div>
+    <div class="opt__body">
+      <div class="hero"><span class="eyebrow">Nashville, Tennessee</span><h2>Qualified CDL drivers. <em>Ready to roll.</em></h2><p>We connect trucking companies with verified, road-ready drivers, and help drivers find jobs worth staying in.</p><div class="btns"><span class="btn btn--a">Hire Drivers</span><span class="btn btn--g">I'm a Driver</span></div></div>
+      <div class="light"><h3>Built in Music City. Moving drivers nationwide.</h3><p>Easy Motion Recruiting is a Nashville-based team that finds, screens and places professional CDL drivers.</p><div class="card"><strong>Driver Screening</strong><small>MVR, FMCSA Clearinghouse, DOT medical card and work history.</small></div></div>
+    </div>
+  </section>
+
+  <section class="opt f3">
+    <div class="opt__head"><b>3 · Archivo (široki, bold)</b><span>Industrijski i samouvjeren. Djeluje kao velika logistička firma.</span></div>
+    <div class="opt__body">
+      <div class="hero"><span class="eyebrow">Nashville, Tennessee</span><h2>Qualified CDL drivers. <em>Ready to roll.</em></h2><p>We connect trucking companies with verified, road-ready drivers, and help drivers find jobs worth staying in.</p><div class="btns"><span class="btn btn--a">Hire Drivers</span><span class="btn btn--g">I'm a Driver</span></div></div>
+      <div class="light"><h3>Built in Music City. Moving drivers nationwide.</h3><p>Easy Motion Recruiting is a Nashville-based team that finds, screens and places professional CDL drivers.</p><div class="card"><strong>Driver Screening</strong><small>MVR, FMCSA Clearinghouse, DOT medical card and work history.</small></div></div>
+    </div>
+  </section>
+
+  <section class="opt f4">
+    <div class="opt__head"><b>4 · Source Serif 4 + Source Sans 3</b><span>Klasično i korporativno, u stilu advokatske firme (kao LW). Najsigurniji izbor.</span></div>
+    <div class="opt__body">
+      <div class="hero"><span class="eyebrow">Nashville, Tennessee</span><h2>Qualified CDL drivers. <em>Ready to roll.</em></h2><p>We connect trucking companies with verified, road-ready drivers, and help drivers find jobs worth staying in.</p><div class="btns"><span class="btn btn--a">Hire Drivers</span><span class="btn btn--g">I'm a Driver</span></div></div>
+      <div class="light"><h3>Built in Music City. Moving drivers nationwide.</h3><p>Easy Motion Recruiting is a Nashville-based team that finds, screens and places professional CDL drivers.</p><div class="card"><strong>Driver Screening</strong><small>MVR, FMCSA Clearinghouse, DOT medical card and work history.</small></div></div>
+    </div>
+  </section>
+
+  <section class="opt f5">
+    <div class="opt__head"><b>5 · Plus Jakarta Sans</b><span>Moderno i čisto, kao tech startup. Prijateljski, bez serifa.</span></div>
+    <div class="opt__body">
+      <div class="hero"><span class="eyebrow">Nashville, Tennessee</span><h2>Qualified CDL drivers. <em>Ready to roll.</em></h2><p>We connect trucking companies with verified, road-ready drivers, and help drivers find jobs worth staying in.</p><div class="btns"><span class="btn btn--a">Hire Drivers</span><span class="btn btn--g">I'm a Driver</span></div></div>
+      <div class="light"><h3>Built in Music City. Moving drivers nationwide.</h3><p>Easy Motion Recruiting is a Nashville-based team that finds, screens and places professional CDL drivers.</p><div class="card"><strong>Driver Screening</strong><small>MVR, FMCSA Clearinghouse, DOT medical card and work history.</small></div></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

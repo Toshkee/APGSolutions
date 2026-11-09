@@ -1,0 +1,507 @@
+<title>Easy Motion Strategija</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: brand presentation in the client's own palette. Off-white reading bands alternate with deep-navy bands, like the future site. Single light look by choice. */
+:root{
+  --paper:#fefcff;      /* client white */
+  --navy:#0b2f90;       /* client blue */
+  --ink:#0d1a3d;        /* text, navy-biased near-black */
+  --night:#081f5f;      /* dark band */
+  --amber:#f5a524;      /* proposed third color: road-sign amber */
+  --tint:#e9eefb;       /* navy-tinted neutral */
+  --line:#d5dcef;
+  --muted:#4d5878;
+  --ok:#1f8a5b;
+  --display:"Instrument Serif", "Times New Roman", Georgia, serif;
+  --body:"Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.band{padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:72px}
+.band.dark{background:var(--night);color:#eef2ff}
+.band.tint{background:var(--tint)}
+.wrap{max-width:1080px;margin-inline:auto}
+.narrow{max-width:68ch}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(44px,7vw,84px);letter-spacing:-.01em}
+h2{font-size:clamp(34px,4.6vw,52px)}
+h3{font-size:26px}
+h1 em,h2 em{font-style:italic;color:var(--navy)}
+.dark h2 em,.dark h1 em{color:var(--amber)}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);display:flex;gap:10px;align-items:center}
+.dark .eyebrow{color:var(--amber)}
+.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
+.stack{display:flex;flex-direction:column;gap:20px}
+.lead{font-size:19px;color:var(--muted);max-width:62ch}
+.dark .lead{color:#b9c4e6}
+.small{font-size:13px;color:var(--muted)}
+.dark .small{color:#9fb0dc}
+a{color:var(--navy)}
+.dark a{color:var(--amber)}
+
+/* top */
+.top{padding-block:28px 0}
+.top .bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:14px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--navy);font-family:var(--body);font-weight:600;letter-spacing:0;text-transform:none;font-size:15px}
+.logo i{width:26px;height:26px;border-radius:7px;background:var(--navy);position:relative;display:block}
+.logo i::after{content:"";position:absolute;left:6px;right:6px;top:11px;height:4px;background:var(--amber);border-radius:2px}
+.hero{padding-block:64px 72px}
+.hero .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end}
+.thesis{border-left:3px solid var(--amber);padding-left:20px;font-size:18px}
+.thesis b{font-weight:600;color:var(--navy)}
+
+/* tldr */
+.tldr{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:48px}
+.tldr div{background:var(--paper);padding:24px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.tldr .k{font-family:var(--mono);font-size:12px;color:var(--navy);letter-spacing:.08em;text-transform:uppercase}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.stat{border-top:1px solid rgba(245,165,36,.6);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.stat .n{font-family:var(--display);font-size:64px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.stat .l{font-size:15px;color:#d5ddf5}
+.stat .s{font-family:var(--mono);font-size:11px;color:#8ea0d4}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--paper);margin-top:32px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14.5px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--tint)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:99px;background:var(--tint);color:var(--navy);white-space:nowrap}
+.tag.warn{background:#fff3dc;color:#8a5a00}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px}
+.pillar{border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px;background:var(--paper);min-width:0}
+.pillar .no{font-family:var(--mono);font-size:12px;color:var(--navy)}
+.pillar .gap{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+.pillar .gap b{color:var(--ink);font-weight:600}
+.pillar.wide{grid-column:1/-1;background:var(--navy);color:#fff;border-color:var(--navy)}
+.pillar.wide .no{color:var(--amber)}
+.pillar.wide .gap{color:#c4d0f2;border-color:rgba(255,255,255,.25)}
+.pillar.wide .gap b{color:#fff}
+
+/* palette */
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+.sw{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.sw .chip{height:110px}
+.sw .meta{padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.sw .meta b{font-weight:600}
+.sw .meta span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.ratio{display:flex;height:14px;border-radius:99px;overflow:hidden;margin-top:24px;border:1px solid var(--line)}
+.typo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.typo>div{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--paper);min-width:0}
+
+/* refs */
+.refs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.ref{border-top:2px solid var(--navy);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.ref .t{font-weight:600}
+.ref .take{font-size:14.5px;color:var(--muted)}
+.ref .take b{color:var(--ok);font-weight:600}
+.ref .skip b{color:#b0462c;font-weight:600}
+.ref .skip{font-size:14.5px;color:var(--muted)}
+
+/* mockup */
+.browser{margin-top:36px;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(8,31,95,.45);border:1px solid #c9d3ee;background:var(--paper)}
+.chrome{background:#eef1f8;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #d9dfee}
+.chrome i{width:10px;height:10px;border-radius:50%;background:#cfd6e8;display:block}
+.chrome .url{margin-left:12px;font-family:var(--mono);font-size:11px;color:var(--muted);background:#fff;padding:4px 12px;border-radius:99px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.site{background:var(--night);color:#fff;position:relative;overflow:hidden}
+.site::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(1200px 400px at 85% 120%, rgba(245,165,36,.18), transparent 60%),
+  repeating-linear-gradient(90deg, transparent 0 46px, rgba(255,255,255,.035) 46px 47px);pointer-events:none}
+.snav{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 28px;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.snav .logo{color:#fff}
+.snav .logo i{background:#fff}
+.snav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:13px;color:#c8d2f0;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:8px;white-space:nowrap}
+.btn.amber{background:var(--amber);color:#1a1300}
+.btn.ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
+.shero{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;padding:56px 28px 60px;align-items:center}
+.shero h3{font-size:clamp(36px,4.8vw,58px);line-height:1.02;color:#fff}
+.shero h3 em{color:var(--amber);font-style:italic}
+.shero p{color:#c3cdee;font-size:16px;max-width:44ch;margin-top:16px}
+.shero .ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.shero .fine{margin-top:18px;font-family:var(--mono);font-size:11px;color:#8ea0d4;letter-spacing:.06em}
+.dcard{background:var(--paper);color:var(--ink);border-radius:14px;padding:20px;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);display:flex;flex-direction:column;gap:14px;min-width:0}
+.dcard .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.dcard .nm{font-weight:600;font-size:16px}
+.dcard .sub{font-size:12.5px;color:var(--muted)}
+.dcard .badge{font-family:var(--mono);font-size:10.5px;background:#e3f4ec;color:var(--ok);padding:3px 8px;border-radius:99px;white-space:nowrap}
+.dcard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.dcard li{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:8px 0;border-top:1px solid var(--line)}
+.dcard li span:last-child{font-family:var(--mono);font-size:12px;color:var(--ok);text-align:right}
+.dcard .ex{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.strip{position:relative;display:flex;gap:28px;padding:16px 28px;border-top:1px solid rgba(255,255,255,.08);font-family:var(--mono);font-size:11px;color:#8ea0d4;letter-spacing:.08em;text-transform:uppercase;flex-wrap:wrap}
+.strip b{color:#fff;font-weight:500}
+
+/* sitemap */
+.flow{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;margin-top:36px}
+.sections{list-style:none;margin:0;padding:0;counter-reset:s;display:flex;flex-direction:column}
+.sections li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.sections li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--navy);padding-top:3px}
+.sections li b{font-weight:600;display:block}
+.sections li span{font-size:14.5px;color:var(--muted)}
+.pages{display:flex;flex-direction:column;gap:12px}
+.page{border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;background:var(--paper)}
+.page b{font-weight:600}
+.page span{font-size:14px;color:var(--muted)}
+.page code{font-family:var(--mono);font-size:12px;color:var(--navy)}
+
+/* compare */
+.cmp td:nth-child(2){background:#f4f7ff;font-weight:500;color:var(--navy)}
+.cmp th:nth-child(2){background:var(--navy);color:#fff}
+
+/* copy */
+.copy{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px}
+.quote{border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.quote .where{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.quote .en{font-family:var(--display);font-size:28px;line-height:1.15;color:#fff}
+.quote .why{font-size:14px;color:#a9b7e0}
+
+/* questions & phases */
+.qs{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;margin-top:28px;list-style:none;padding:0}
+.qs li{padding:14px 0;border-top:1px solid var(--line);display:flex;gap:12px}
+.qs li::before{content:"?";font-family:var(--display);font-size:24px;line-height:1;color:var(--amber)}
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.phase{border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);background:var(--paper)}
+.phase .w{font-family:var(--mono);font-size:12px;color:var(--navy)}
+.phase ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.phase.now{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+
+.src{font-size:13px;color:var(--muted);columns:2;column-gap:40px}
+.src li{break-inside:avoid;margin-bottom:6px}
+.src a{word-break:break-word}
+
+@media (max-width:860px){
+  .hero .grid,.shero,.flow,.typo,.copy{grid-template-columns:1fr}
+  .tldr,.stats,.refs,.phases{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+  .qs{grid-template-columns:1fr}
+  .src{columns:1}
+  .band{padding-block:56px}
+  .snav ul{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .dcard li span:last-child{animation:tick .5s ease both}
+  .dcard li:nth-child(2) span:last-child{animation-delay:.15s}
+  .dcard li:nth-child(3) span:last-child{animation-delay:.3s}
+  .dcard li:nth-child(4) span:last-child{animation-delay:.45s}
+  .dcard li:nth-child(5) span:last-child{animation-delay:.6s}
+  @keyframes tick{from{opacity:.25;transform:translateX(-4px)}to{opacity:1;transform:none}}
+}
+</style>
+
+<header class="band top">
+  <div class="wrap">
+    <div class="bar">
+      <span class="logo"><i></i>Easy Motion Recruiting</span>
+      <span>Istraživanje i pravac sajta · novembar 2026.</span>
+    </div>
+  </div>
+</header>
+
+<section class="band hero">
+  <div class="wrap">
+    <div class="grid">
+      <div class="stack">
+        <div class="eyebrow">Ideja u jednoj rečenici</div>
+        <h1>Agencija koja <em>pokazuje</em> ono što drugi kriju.</h1>
+      </div>
+      <p class="thesis">Konkurencija krije cijenu, ne piše šta provjerava i nema lica. Mi ćemo imati <b>javnu cijenu</b>, <b>plaćanje tek kad vozač počne</b>, <b>vidljivu listu provjera</b>, <b>prave ljude sa imenom i brojem</b> i jasno obećanje vozačima. Sajt to treba da pokaže za 5 sekundi.</p>
+    </div>
+    <div class="tldr">
+      <div><span class="k">Tržište</span><p>Firme za regrutaciju vozača rade na četiri načina: plaćanje po zaposlenju, procenat od plate, mjesečni retainer i prodaja leadova. Prevoznici najviše mrze plaćanje unaprijed i nekvalifikovane kandidate.</p></div>
+      <div><span class="k">Rupa</span><p>Od referentnih sajtova nijedan ne objavljuje cijenu ni proces provjere. U Nashvilleu nismo našli nijednu agenciju koja radi „plati po vozaču“, a I-65 direktno spaja Nashville i Chicago.</p></div>
+      <div><span class="k">Sajt</span><p>Bijelo-plavi, mirni sajt sa malo teksta i jednom akcentnom bojom. Dvije publike, dva jasna dugmeta. Glavna je stranica za prevoznike, a vozači imaju kratku prijavu.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band dark">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Zašto prevoznici plaćaju</div>
+      <h2>Prazno sjedište u kamionu je <em>skup</em> problem.</h2>
+      <p class="lead">Ovo su tri broja koja kupac već osjeća. Sajt treba da ih kaže umjesto njega i da ponudi rješenje.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">58%</span><span class="l">vozača aktivno traži novi posao (proljeće 2026; godinu ranije 47%)</span><span class="s">Conversion Interactive / PDA · TT News 2026</span></div>
+      <div class="stat"><span class="n">~$13k</span><span class="l">košta prevoznika svaki vozač koji ode (druga studija: prosjek $8.2k)</span><span class="s">PDA · TT News 2026 / UGPTI 2025</span></div>
+      <div class="stat"><span class="n">91%</span><span class="l">vozača neki regruter kontaktira bar jednom nedeljno. Vozači su umorni od spama.</span><span class="s">Driver survey · Truckinginfo 2025</span></div>
+    </div>
+    <p class="small" style="margin-top:28px;max-width:70ch">Napomena: ATA je 2025. prestao da govori o „nestašici vozača“ i sad govori o nestašici <i>kvalitetnih</i> vozača. Zato na sajtu govorimo „qualified drivers“, ne „driver shortage“. Djeluje pametnije i tačnije.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Konkurencija</div>
+      <h2>Ko je na tržištu i gdje griješi</h2>
+      <p class="lead">Pregled referentnih sajtova i najbližih konkurenata. Cijene su samo one koje su javno objavljene.</p>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Firma</th><th>Model</th><th>Cijena / garancija</th><th>Slaba tačka</th></tr></thead>
+        <tbody>
+          <tr><td><b>CDL Agency</b><br><span class="small">Mundelein, IL</span></td><td>Pay per driver, retaineri, softver, mreža od 100+ regrutera</td><td>Cijena nije objavljena. Rate vezane za zadržavanje vozača.</td><td>Prodaje previše stvari odjednom. Nema provjera, nema imenovanih recenzija. Tamni, prenatrpan sajt.</td></tr>
+          <tr><td><b>Driver Match USA</b><br><span class="small">Florida</span></td><td>Matchmaking: vozač besplatno, prevoznik plaća</td><td>Nema cijene ni garancije</td><td>Nema recenzija, logotipa ni ljudi. Već koristi navy + bijelo, pa se moramo razlikovati tipografijom i stavom.</td></tr>
+          <tr><td><b>O Trucking</b></td><td>Flat fee po vozaču</td><td><span class="tag">$500 solo / $750 tim</span> zamjena u roku od 30 dana</td><td>Najjeftiniji i jedini transparentan. Odličan SEO po gradovima, ali brend djeluje jeftino.</td></tr>
+          <tr><td><b>TransForce</b><br><span class="small">ima kancelariju u Chicagu</span></td><td>Direct hire, W-2 staffing, outsourcing</td><td>„Performance based“, bez rokova</td><td>Velik i bezličan. Ne obećava nijedan rok.</td></tr>
+          <tr><td><b>Conversion Interactive</b><br><span class="small">Brentwood, TN (Nashville)</span></td><td>Marketing agencija (oglasi, leadovi)</td><td>Ne objavljuje</td><td>Prodaje oglase, ne zaposlene vozače. Prevoznik i dalje sam radi regrutaciju.</td></tr>
+          <tr><td><b>Randall Reilly, Drive My Way</b></td><td>Leadovi / platforma na pretplatu</td><td>Ne objavljuju</td><td>Količina umjesto kvaliteta. Isti vozač stiže kod deset firmi.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:16px">Tipični tržišni rasponi (2026): flat <span class="tag">$2,000–$5,000</span> po zaposlenju uz garanciju od 30 dana · <span class="tag">15–25%</span> godišnje plate uz zamjenu u roku od 60–90 dana · RPO <span class="tag">$3,000–$8,000/mj</span> + fee. <span class="tag warn">izvor je blog, ne zvanična statistika</span></p>
+  </div>
+</section>
+
+<section class="band tint">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Kako da budemo bolji</div>
+      <h2>Pet stvari koje niko drugi ne radi <em>zajedno</em></h2>
+      <p class="lead">Svaka popunjava konkretnu rupu kod konkurencije. Zajedno čine poziciju koju je teško kopirati.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar wide">
+        <span class="no">01 · Glavna poruka</span>
+        <h3>Javna cijena. Plaćaš kad vozač počne. Besplatna zamjena 90 dana.</h3>
+        <p>Jedan fiksni iznos po vozaču, objavljen na sajtu. Plaća se u dvije rate: dio prvog radnog dana, ostatak nakon 60 dana ako vozač ostane. Ako ode u prvih 90 dana, šaljemo zamjenu bez naplate.</p>
+        <p class="gap"><b>Rupa:</b> CDL Agency i Driver Match ne objavljuju cijenu. O Trucking je objavljuje, ali daje samo 30 dana. Iznos i trajanje garancije mora potvrditi klijent.</p>
+      </div>
+      <div class="pillar">
+        <span class="no">02 · Provjera</span>
+        <h3>„Verified, not just sourced“</h3>
+        <p>Vidljiva lista onoga što provjeravamo prije nego što pošaljemo vozača: FMCSA Clearinghouse, MVR za posljednje 3 godine, PSP izvještaj, DOT medicinsko uvjerenje, drug test i provjera prethodnih poslodavaca.</p>
+        <p class="gap"><b>Rupa:</b> nijedan referentni sajt ne pominje provjere. Prevoznicima je to najveći strah: 54% kaže da dobija gomilu nekvalifikovanih kandidata.</p>
+      </div>
+      <div class="pillar">
+        <span class="no">03 · Lica</span>
+        <h3>Pravi ljudi, ne call centar</h3>
+        <p>Stranica tima kao kod Latham &amp; Watkins: fotografija, ime, uloga, kancelarija (Chicago / Nashville) i direktan broj. Svaki prevoznik dobija jednog imenovanog regrutera.</p>
+        <p class="gap"><b>Rupa:</b> konkurenti nemaju nijedno lice. Zato je referenca LW, da djelujemo kao ozbiljna profesionalna firma.</p>
+      </div>
+      <div class="pillar">
+        <span class="no">04 · Vozači</span>
+        <h3>Obećanje vozačima</h3>
+        <p>Plata i vrijeme kod kuće napisani crno na bijelo prije razgovora. Jedan regruter, bez spam poziva, podaci se nikad ne preprodaju. Prijava traje 60 sekundi.</p>
+        <p class="gap"><b>Rupa:</b> vozači se najviše žale na lažna obećanja i 12 poziva dnevno. Bolji vozači znače i bolje zadržavanje kod prevoznika.</p>
+      </div>
+      <div class="pillar">
+        <span class="no">05 · Lokacija</span>
+        <h3>Koridor I-65: Chicago ↔ Nashville</h3>
+        <p>Chicago je najveći intermodalni čvor u SAD. Tennessee je 3. po broju poslova u truckingu. I-65 ih spaja direktno (~470 milja). Brend gradimo oko tog koridora, ali radimo nacionalno.</p>
+        <p class="gap"><b>Rupa:</b> u Nashvilleu nismo našli pay-per-hire agenciju. Lokalni identitet daje bolji SEO i više povjerenja.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Poređenje na sajtu</div>
+      <h2>Tabela koja prodaje umjesto nas</h2>
+      <p class="lead">Ideja je preuzeta od Caffreya (njihova „Caffrey vs General-purpose AI“ tabela). Kod nas je to Easy Motion naspram tipične agencije.</p>
+    </div>
+    <div class="tbl cmp">
+      <table>
+        <thead><tr><th>Šta je važno</th><th>Easy Motion</th><th>Tipična agencija</th></tr></thead>
+        <tbody>
+          <tr><td>Cijena</td><td>Objavljena na sajtu</td><td>„Pozovite nas“</td></tr>
+          <tr><td>Kad plaćaš</td><td>Kad vozač počne da vozi</td><td>Retainer ili plaćanje unaprijed</td></tr>
+          <tr><td>Garancija</td><td>90 dana, besplatna zamjena</td><td>30 dana ili nikakva</td></tr>
+          <tr><td>Provjera vozača</td><td>Clearinghouse, MVR, PSP, DOT, drug test, sve vidljivo</td><td>Ne navodi se</td></tr>
+          <tr><td>S kim pričaš</td><td>Jedan imenovani regruter</td><td>Pool regrutera ili call centar</td></tr>
+          <tr><td>Kako tretiramo vozača</td><td>Uslovi napisani, bez spama, bez preprodaje</td><td>Lead ide kod deset firmi</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band tint">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Vizuelni pravac</div>
+      <h2>Bijelo, plavo i <em>jedna</em> boja sa puta</h2>
+      <p class="lead">Tvoje dvije boje nose sajt. Kao treću predlažem amber, boju putnih znakova i oznaka na kolovozu. Koristi se rijetko, samo za glavno dugme i ključne riječi, isto kao žuta kod Caffreya.</p>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#fefcff;border-bottom:1px solid var(--line)"></div><div class="meta"><b>Paper</b><span>#fefcff · pozadina</span></div></div>
+      <div class="sw"><div class="chip" style="background:#0b2f90"></div><div class="meta"><b>Motion Blue</b><span>#0b2f90 · brend, naslovi</span></div></div>
+      <div class="sw"><div class="chip" style="background:#081f5f"></div><div class="meta"><b>Night</b><span>#081f5f · tamne sekcije</span></div></div>
+      <div class="sw"><div class="chip" style="background:#f5a524"></div><div class="meta"><b>Signal Amber</b><span>#f5a524 · samo CTA i akcenti</span></div></div>
+    </div>
+    <div class="ratio" aria-label="Odnos boja: 60% bijela, 25% plava, 12% tamno plava, 3% amber">
+      <span style="flex:60;background:#fefcff"></span><span style="flex:25;background:#0b2f90"></span><span style="flex:12;background:#081f5f"></span><span style="flex:3;background:#f5a524"></span>
+    </div>
+    <p class="small" style="margin-top:8px">Odnos boja: 60 bijela · 25 plava · 12 tamno plava · 3 amber. Alternativa za treću boju, ako amber bude previše „trucking“: svijetlo nebo plava #e9eefb kao pozadina sekcija, bez jakog akcenta.</p>
+    <div class="typo">
+      <div><span class="eyebrow">Naslovi · Instrument Serif</span><p style="font-family:var(--display);font-size:44px;line-height:1.05;margin-top:14px;color:var(--navy)">Drivers in seats. <i>Not leads in inboxes.</i></p><p class="small" style="margin-top:10px">Elegantan serif, sličan Caffreyu. Djeluje kao advokatska firma, ne kao jeftina agencija. Tu je najveća vizuelna razlika u odnosu na Driver Match.</p></div>
+      <div><span class="eyebrow">Tekst i podaci · Geist + Geist Mono</span><p style="font-size:17px;margin-top:14px">Clean, modern sans for body copy and buttons.</p><p style="font-family:var(--mono);font-size:14px;margin-top:10px;color:var(--navy)">CDL-A · MVR CLEAN · DOT MED 08/2027</p><p class="small" style="margin-top:10px">Mono font za „tehničke“ detalje (provjere, brojevi, lokacije). Daje utisak preciznosti i sistema.</p></div>
+    </div>
+
+    <div class="refs">
+      <div class="ref"><span class="t">Caffrey.ai</span><p class="take"><b>Uzimamo:</b> serif naslove, smjenu tamnih i svijetlih sekcija, „živu“ karticu u heroju, red sa brojkama i tabelu poređenja.</p><p class="skip"><b>Ne uzimamo:</b> potpuno tamnu pozadinu. Kod nas dominira bijela.</p></div>
+      <div class="ref"><span class="t">bros.co.me</span><p class="take"><b>Uzimamo:</b> malo teksta, puno prostora, velike kvalitetne fotografije i jednu akciju po sekciji.</p><p class="skip"><b>Ne uzimamo:</b> e-commerce strukturu.</p></div>
+      <div class="ref"><span class="t">lw.com/people</span><p class="take"><b>Uzimamo:</b> karticu tima (foto, ime, uloga, grad, kontakt) i filter po kancelariji.</p><p class="skip"><b>Ne uzimamo:</b> 4.000 ljudi. Nama treba 4–8 kartica.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Skica naslovne</div>
+      <h2>Ovako bi mogao izgledati prvi ekran</h2>
+      <p class="lead">Lijevo je glavna poruka sa dva dugmeta. Desno je kartica „verifikovanog vozača“, naša verzija Caffreyevog demo prozora. Odmah pokazuje šta prevoznik dobija.</p>
+    </div>
+    <div class="browser" role="img" aria-label="Skica naslovne strane Easy Motion Recruiting sajta">
+      <div class="chrome"><i></i><i></i><i></i><span class="url">easymotionrecruiting.com</span></div>
+      <div class="site">
+        <div class="snav">
+          <span class="logo"><i></i>Easy Motion</span>
+          <ul><li>For Carriers</li><li>For Drivers</li><li>What We Verify</li><li>Pricing</li><li>Our Team</li></ul>
+          <span class="btn amber">Request Drivers →</span>
+        </div>
+        <div class="shero">
+          <div>
+            <h3>Qualified CDL drivers in your seats. <em>Pay when they start.</em></h3>
+            <p>Every driver is verified before you meet them: Clearinghouse, MVR, PSP, DOT medical. One flat fee. 90-day replacement.</p>
+            <div class="ctas"><span class="btn amber">Request Drivers</span><span class="btn ghost">I'm a Driver →</span></div>
+            <p class="fine">CHICAGO, IL · NASHVILLE, TN · HIRING NATIONWIDE</p>
+          </div>
+          <div class="dcard">
+            <div class="hd"><div><div class="nm">Marcus T.</div><div class="sub">CDL-A · 6 yrs OTR · Dry van, Reefer</div></div><span class="badge">VERIFIED</span></div>
+            <ul>
+              <li><span>FMCSA Clearinghouse</span><span>✓ Clear</span></li>
+              <li><span>MVR · 3 states</span><span>✓ Clean</span></li>
+              <li><span>PSP report</span><span>✓ 0 crashes</span></li>
+              <li><span>DOT medical card</span><span>✓ Valid 08/2027</span></li>
+              <li><span>Drug screen</span><span>✓ Negative</span></li>
+            </ul>
+            <span class="ex">Primjer · izmišljen vozač</span>
+          </div>
+        </div>
+        <div class="strip"><span><b>$0</b> upfront</span><span><b>90-day</b> replacement</span><span><b>1</b> named recruiter</span><span><b>[X]</b> drivers placed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band tint">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Struktura</div>
+      <h2>Malo stranica, svaka sa jednim zadatkom</h2>
+    </div>
+    <div class="flow">
+      <div>
+        <h3 style="margin-bottom:12px">Naslovna, od vrha ka dnu</h3>
+        <ol class="sections">
+          <li><div><b>Hero + kartica vozača</b><span>Poruka, dva dugmeta, verifikovani vozač</span></div></li>
+          <li><div><b>Logotipi prevoznika i brojke</b><span>Tek kad klijent ima prave podatke. Bez izmišljanja.</span></div></li>
+          <li><div><b>Problem u 3 broja</b><span>58% · $13k · 91%</span></div></li>
+          <li><div><b>Kako radi</b><span>Pošalji zahtjev → mi tražimo i provjeravamo → upoznaš vozače → plaćaš kad počne</span></div></li>
+          <li><div><b>Šta provjeravamo</b><span>Checklista sa 6 stavki</span></div></li>
+          <li><div><b>Cijena</b><span>Jedna kartica, jedan broj</span></div></li>
+          <li><div><b>Easy Motion naspram tipične agencije</b><span>Tabela poređenja</span></div></li>
+          <li><div><b>Za vozače</b><span>Obećanje + prijava od 60 sekundi</span></div></li>
+          <li><div><b>Tim</b><span>3–4 lica, link na cijeli tim</span></div></li>
+          <li><div><b>Završni CTA i footer</b><span>Telefon, kancelarije, radno vrijeme (CT)</span></div></li>
+        </ol>
+      </div>
+      <div class="pages">
+        <h3 style="margin-bottom:12px">Stranice (faza 1)</h3>
+        <div class="page"><b>Home</b><code>/</code><span>Sve gore navedeno, ukratko</span></div>
+        <div class="page"><b>For Carriers</b><code>/carriers</code><span>Proces, cijena, garancija, FAQ i forma „Request Drivers“ u 3 koraka (USDOT broj, broj vozača, tip opreme)</span></div>
+        <div class="page"><b>For Drivers</b><code>/drivers</code><span>Obećanje vozačima, tipovi poslova (OTR, regional, local, reefer, flatbed, tanker) i kratka prijava</span></div>
+        <div class="page"><b>What We Verify</b><code>/verification</code><span>Detaljno objašnjenje svake provjere. Gradi povjerenje i SEO.</span></div>
+        <div class="page"><b>Our Team</b><code>/team</code><span>Kartice u LW stilu, filter Chicago / Nashville</span></div>
+        <div class="page"><b>Contact</b><code>/contact</code><span>Dvije kancelarije, telefon, forma</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band dark">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Ton i primjeri teksta</div>
+      <h2>Kratko, direktno, <em>američki</em></h2>
+      <p class="lead">Malo teksta, kratke rečenice i konkretni brojevi. Bez fraza tipa „we are the leading solution“.</p>
+    </div>
+    <div class="copy">
+      <div class="quote"><span class="where">Hero · prevoznici</span><p class="en">Qualified CDL drivers in your seats. Pay when they start.</p><p class="why">Kaže šta dobijaju i kad plaćaju. Rješava najveći strah, plaćanje unaprijed.</p></div>
+      <div class="quote"><span class="where">Sekcija provjera</span><p class="en">Verified, not just sourced.</p><p class="why">Odvaja nas od firmi koje prodaju leadove.</p></div>
+      <div class="quote"><span class="where">Za vozače</span><p class="en">The pay and home time we quote is the pay and home time you get. In writing.</p><p class="why">Pogađa najveću frustraciju vozača.</p></div>
+      <div class="quote"><span class="where">Završni CTA</span><p class="en">Tell us how many seats are empty. We'll call you back the same business day.</p><p class="why">Konkretna akcija i konkretan rok. Rok mora potvrditi klijent.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Prije dizajna</div>
+      <h2>Šta nam treba od klijenta</h2>
+      <p class="lead">Ova pitanja diktiraju glavnu poruku. Bez odgovora ne obećavamo ništa na sajtu.</p>
+    </div>
+    <ul class="qs">
+      <li>Koliki je fee po vozaču i da li ga smijemo objaviti? (tržište: $500 do $5,000)</li>
+      <li>Koju garanciju zaista mogu da ispune: 30, 60 ili 90 dana?</li>
+      <li>Koje provjere stvarno rade sami, a koje radi prevoznik?</li>
+      <li>Da li rade samo direct hire ili i W-2 / lease drivere?</li>
+      <li>Koliko su vozača već zaposlili, za koje prevoznike i smijemo li koristiti logotipe?</li>
+      <li>Da li imaju 2–3 prevoznika spremna za recenziju sa imenom?</li>
+      <li>Gdje je sjedište: Chicago, Nashville ili oba? Prave adrese?</li>
+      <li>Fotografije tima i prave fotografije kamiona/vozača (ne stock)?</li>
+      <li>Ime i logo: „Easy Motion Recruiting“, postoji li logo?</li>
+      <li>Kanali: telefon, SMS, WhatsApp? Gdje idu prijave (CRM, Tenstreet, email)?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band tint">
+  <div class="wrap">
+    <div class="stack narrow">
+      <div class="eyebrow">Plan</div>
+      <h2>Kako krećemo</h2>
+    </div>
+    <div class="phases">
+      <div class="phase now"><span class="w">Faza 1 · sedmica 1</span><h3>Pozicija i sadržaj</h3><ul><li>Odgovori na pitanja iznad</li><li>Finalna poruka i cijena</li><li>Tekstovi za 6 stranica (EN)</li><li>Logo / mini brend</li></ul></div>
+      <div class="phase"><span class="w">Faza 2 · sedmice 2–3</span><h3>Dizajn i razvoj</h3><ul><li>Dizajn naslovne → odobrenje</li><li>Ostale stranice</li><li>Forme povezane na email/CRM</li><li>Mobilna verzija prvo (vozači su na telefonu)</li></ul></div>
+      <div class="phase"><span class="w">Faza 3 · nakon lansiranja</span><h3>Rast</h3><ul><li>SEO stranice po gradu/opremi („CDL drivers Nashville“, „reefer drivers Chicago“)</li><li>Kalkulator „koliko te košta prazan kamion“</li><li>Recenzije i case studies</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="wrap stack">
+    <div class="eyebrow">Izvori</div>
+    <ul class="src">
+      <li>Konkurenti: <a href="https://cdlagency.com/pay-per-driver">cdlagency.com</a>, <a href="https://drivermatchusa.com/">drivermatchusa.com</a>, <a href="https://otrucking.com/careers/hire/states/tennessee/">otrucking.com</a>, <a href="https://transforce.com/digital-recruiting">transforce.com</a></li>
+      <li>58% vozača traži posao, ~$13k po vozaču: <a href="https://www.ttnews.com/articles/trucking-turnover-risk-2026">TT News, jun 2026</a></li>
+      <li>$8,234 prosječan trošak odlaska: <a href="https://www.centerlinedrivers.com/resources/how-much-does-truck-driver-turnover-cost/">Centerline / UGPTI, 2025</a></li>
+      <li>91% kontaktirano nedeljno, 54% nekvalifikovanih prijava: <a href="https://www.truckinginfo.com/news/trucking-survey-fewer-committed-driver-applicants-growing-retention-risks">Truckinginfo, 2025</a></li>
+      <li>Rasponi cijena agencija: <a href="https://www.cargocredible.com/blog/driver-recruitment-agencies-trucking/">Cargocredible blog, maj 2026</a></li>
+      <li>ATA i „quality drivers“: <a href="https://www.freightwaves.com/news/ata-caves-on-driver-shortage-lie-hard-pivot-to-quality-dodge-no-apologies">FreightWaves, 2025</a></li>
+      <li>Chicago kao freight hub: <a href="https://www.cmap.illinois.gov/2050/draft/mobility/freight">CMAP</a> · Tennessee: <a href="https://www.tn.gov/content/dam/tn/tdot/freight-and-logistics/FreightFact_PW.pdf">TDOT Freight Facts</a></li>
+      <li>Clearinghouse pravila: <a href="https://truckload.org/wp-content/uploads/2022/11/FMCSA-Pre-employment-Investigations-after-January-6-2023.pdf">FMCSA / TCA</a></li>
+    </ul>
+    <p class="small">Cijene konkurenata potiču sa njihovih sajtova ili iz rezultata pretrage. Prije objave ih treba ponovo provjeriti. Poruke o garanciji i rokovima su prijedlozi i važe tek kad ih klijent potvrdi.</p>
+  </div>
+</footer>
