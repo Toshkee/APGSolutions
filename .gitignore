@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Local agent/editor config
 .claude/
+
+# Generated before/after comparison page (4 MB of embedded screenshots)
+research/apg-prije-poslije.html

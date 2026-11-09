@@ -1,34 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Inter, Saira } from "next/font/google";
 import { MotionProvider } from "@/components/MotionProvider";
-import { site } from "@/content/site";
+import { site } from "@/content/apg";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const saira = Saira({
+  variable: "--font-saira",
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: "800",
+  style: "italic",
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} | CDL Driver Recruiting in Nashville, TN`,
+  title: `${site.name} | Pay-Per-Driver CDL Recruiting`,
   description:
-    "Easy Motion Recruiting connects trucking companies with qualified, verified CDL drivers. Based in Nashville, Tennessee.",
+    "Only pay when we put a driver in your seat. Pre-screened, road-ready CDL drivers for carriers nationwide. No retainers, no monthly fees.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#071e5c",
+  themeColor: "#061232",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geist.variable} ${instrumentSerif.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${saira.variable} antialiased`}>
       <body>
         <MotionProvider>{children}</MotionProvider>
       </body>

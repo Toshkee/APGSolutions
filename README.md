@@ -15,11 +15,12 @@ Open http://localhost:3000.
 
 ## Where things live
 
-- `src/content/site.ts`: all copy, contact details, services and team (edit content here)
-- `src/components/`: page sections (Nav, Hero, Services, About, Team, Contact, Footer)
-- `src/app/actions.ts`: contact form Server Action (sends email through Resend)
-- `public/media/`: hero video and poster
-- `src/assets/`: images imported with `next/image`
+This branch (`apg-design`) implements the designer's APG Solutions landing page from Figma.
+
+- `src/content/apg.ts`: all copy, stats, FAQ and contact details (edit content here)
+- `src/components/apg/`: page sections (Nav, Hero, Stats, Problem, TwoSides, Benefits, HowItWorks, Pricing, DriverTypes, Faq, Cta + LeadForm, Footer)
+- `src/app/actions.ts`: lead form Server Action for carriers and drivers (sends email through Resend)
+- `public/apg/`: logo, hero photo and icons exported from Figma
 
 ## Contact form
 

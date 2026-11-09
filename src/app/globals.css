@@ -1,42 +1,69 @@
 @import "tailwindcss";
 
-/* Easy Motion brand tokens: client white + client blue, amber only for primary actions */
+/* APG Solutions tokens (from the Figma landing page) */
 @theme {
-  --color-paper: #fefcff;
-  --color-brand: #0b2f90;
-  --color-brand-hover: #0d37a6;
-  --color-night: #071e5c;
-  --color-amber: #f5a524;
+  --color-blue: #1557e6;
+  --color-blue-hover: #0f4ad0;
+  --color-sky: #6fa4ff;
+  --color-amber: #f5a524; /* third accent: actions, eyebrow bars, checks */
   --color-amber-hover: #ffb43d;
-  --color-ink: #0d1a3d;
-  --color-muted: #55607e;
-  --color-tint: #eef2fb;
-  --color-line: #dbe1f0;
-  --color-sky: #cfdcff;
+  --color-amber-deep: #d98a00; /* amber for small marks on white, better contrast */
+  --color-navy: #0b1b3f;
+  --color-deep: #061232;
+  --color-indigo: #0b2463;
+  --color-surface: #f5f7fb;
+  --color-line: #e1e6f0;
+  --color-line-soft: #e6eaf2;
+  --color-line-input: #dce2ee;
+  --color-body: #4a5878;
+  --color-muted: #5b6887;
+  --color-subtle: #7a86a0;
+  --color-placeholder: #8a95ae;
+  --color-label: #33415f;
+  --color-on-dark: #c9d6f2;
+  --color-on-dark-muted: #b6c4e4;
+  --color-footer-text: #afc0e3;
+  --color-cta-text: #d3e0ff;
+  --color-danger-soft: #ffe8e8;
+  --color-pill: #e8f0ff;
+  --color-tab: #f1f4fa;
+  --color-track: #e3e8f3;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-saira), "Arial Narrow", system-ui, sans-serif;
 }
 
-@utility container-x {
+/* 100px gutters at 1440 (1240 content), 24px on phones */
+@utility container-apg {
   margin-inline: auto;
   width: 100%;
-  max-width: 1160px;
-  padding-inline: max(20px, env(safe-area-inset-left, 0px));
+  max-width: 1440px;
+  padding-inline: max(24px, env(safe-area-inset-left, 0px));
+  @media (width >= 48rem) {
+    padding-inline: 40px;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 100px;
+  }
 }
 
-@utility eyebrow {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+/* Saira ExtraBold Italic, uppercase headlines */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
   text-transform: uppercase;
 }
 
 :root {
-  --nav-h: 76px;
-  --overlap: 110px;
+  --nav-h: 72px;
+}
+@media (width >= 64rem) {
+  :root {
+    --nav-h: 96px;
+  }
 }
 
 html {
@@ -45,11 +72,9 @@ html {
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: #ffffff;
+  color: var(--color-navy);
   font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,7 +85,7 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-sky);
   outline-offset: 3px;
 }
 
