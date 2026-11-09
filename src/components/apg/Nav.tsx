@@ -9,14 +9,6 @@ import { Button, Svg } from "./ui";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -25,30 +17,16 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Transparent over the hero video at the top, solid white once scrolled or when the menu is open
-  const solid = scrolled || open;
-  const onVideo = "brightness-0 invert";
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,box-shadow,color] duration-300 ${
-        solid
-          ? "border-line-soft bg-white text-navy shadow-[0_8px_30px_-18px_rgba(11,27,63,0.35)]"
-          : "border-white/10 bg-transparent text-white"
-      }`}
+      className="fixed inset-x-0 top-0 z-50 border-b border-line-soft bg-white pt-[env(safe-area-inset-top)] text-navy shadow-[0_8px_30px_-18px_rgba(11,27,63,0.35)]"
     >
       <div className="container-apg flex h-(--nav-h) items-center justify-between gap-6">
-        {/* The logo is a raster on white, so it sits on a white plate over the video */}
-        <a
-          href="#top"
-          aria-label="APG Solutions home"
-          onClick={() => setOpen(false)}
-          className={`rounded-xl bg-white transition-[padding] duration-300 ${solid ? "p-0" : "px-2 py-1"}`}
-        >
+        <a href="#top" aria-label="APG Solutions home" onClick={() => setOpen(false)}>
           <Logo priority className="w-[110px] lg:w-[150px]" />
         </a>
 
-        <nav aria-label="Main" className="hidden items-center gap-9 text-[15px] font-semibold lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-6 text-[15px] font-semibold whitespace-nowrap lg:flex xl:gap-9">
           {navLinks.map((l) => (
             <a key={l.href} href={l.href} className="group relative transition-colors">
               {l.label}
@@ -58,8 +36,8 @@ export function Nav() {
         </nav>
 
         <div className="hidden items-center gap-[22px] lg:flex">
-          <a href={site.phoneHref} className="flex items-center gap-2 text-[15px] font-bold transition-colors hover:text-amber">
-            <Svg src="/apg/icon-phone.svg" w={18} h={18} className={`transition ${solid ? "" : onVideo}`} />
+          <a href={site.phoneHref} className="flex items-center gap-2 text-[15px] font-bold whitespace-nowrap transition-colors hover:text-amber">
+            <Svg src="/apg/icon-phone.svg" w={18} h={18} />
             {site.phone}
           </a>
           <Button href="#get-started" size="sm">
@@ -80,7 +58,7 @@ export function Nav() {
               <path d="M7 7l14 14M21 7L7 21" stroke="#0B1B3F" strokeWidth="2.56667" strokeLinecap="round" />
             </svg>
           ) : (
-            <Svg src="/apg/icon-menu.svg" w={28} h={28} className={solid ? "" : onVideo} />
+            <Svg src="/apg/icon-menu.svg" w={28} h={28} />
           )}
         </button>
       </div>
