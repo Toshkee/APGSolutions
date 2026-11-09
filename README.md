@@ -1,6 +1,6 @@
-# Easy Motion Recruiting
+# APG Solutions
 
-Website for Easy Motion Recruiting, a CDL driver recruiting company in Nashville, TN.
+Website for APG Solutions, a CDL driver recruiting company in Nashville, TN.
 
 Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · Motion
 
