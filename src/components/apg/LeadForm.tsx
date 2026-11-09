@@ -97,7 +97,7 @@ export function LeadForm() {
 
   return (
     <div className="flex w-full flex-col rounded-[18px] bg-white p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9 lg:w-[516px] lg:shrink-0">
-      <h3 className="display text-[20px] leading-tight text-navy sm:text-[26px]">{cta.form.title}</h3>
+      <h3 className="text-[20px] leading-tight font-bold tracking-[-0.02em] text-navy sm:text-[24px]">{cta.form.title}</h3>
       <p className="mt-1.5 text-[15px] text-muted">{cta.form.lead}</p>
 
       <AnimatePresence mode="wait" initial={false}>

@@ -21,7 +21,7 @@ export function Stats() {
                   <span className="lg:hidden">{s.labelShort}</span>
                   <span className="hidden lg:inline">{s.label}</span>
                 </dt>
-                <dd className="font-display text-[32px] leading-none font-extrabold text-blue italic lg:text-[46px]">
+                <dd className="text-[32px] leading-none font-extrabold tracking-[-0.03em] text-blue lg:text-[44px]">
                   {s.value}
                 </dd>
               </div>

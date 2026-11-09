@@ -33,19 +33,7 @@ export function Button({ variant = "primary", size = "md", className = "", child
   );
 }
 
-export function Eyebrow({ children, tone = "blue" }: { children: ReactNode; tone?: "blue" | "sky" }) {
-  const color = tone === "sky" ? "text-sky" : "text-blue";
-  const bar = "bg-amber";
-  return (
-    <p className={`flex items-center gap-2 text-[13px] font-bold tracking-[2px] uppercase ${color}`}>
-      <span aria-hidden="true" className={`h-[3px] w-7 rounded-[2px] ${bar}`} />
-      {children}
-    </p>
-  );
-}
-
 type HeadingProps = {
-  eyebrow: string;
   title: string;
   lead?: string;
   align?: "left" | "center";
@@ -56,9 +44,8 @@ type HeadingProps = {
   leadDesktopOnly?: boolean;
 };
 
-// Eyebrow + Saira headline + lead paragraph, as used at the top of every section
+// Headline + lead paragraph at the top of each section. Saira is kept for the hero and the final CTA only.
 export function SectionHeading({
-  eyebrow,
   title,
   lead,
   align = "left",
@@ -70,9 +57,8 @@ export function SectionHeading({
   const center = align === "center";
   return (
     <div className={`flex flex-col ${center ? "items-center text-center" : "items-start"}`}>
-      <Eyebrow tone={tone === "dark" ? "sky" : "blue"}>{eyebrow}</Eyebrow>
       <h2
-        className={`display mt-4 text-[34px] leading-[1.05] tracking-[-0.5px] lg:text-[52px] ${
+        className={`text-[32px] leading-[1.1] font-bold tracking-[-0.025em] text-balance lg:text-[48px] ${
           tone === "dark" ? "text-white" : "text-navy"
         } ${titleClassName}`}
       >

@@ -13,7 +13,7 @@ export function Faq() {
     <section id="faq" className="pt-16 pb-12 lg:pt-[110px] lg:pb-20">
       <div className="container-apg flex flex-col gap-7 lg:flex-row lg:items-start lg:gap-20">
         <Reveal className="lg:w-[420px] lg:shrink-0">
-          <SectionHeading eyebrow={faq.eyebrow} title={faq.title} lead={faq.lead} leadClassName="lg:max-w-[400px]" leadDesktopOnly />
+          <SectionHeading title={faq.title} lead={faq.lead} leadClassName="lg:max-w-[400px]" leadDesktopOnly />
           <Button href="#get-started" variant="dark" className="mt-7 hidden lg:inline-flex">
             {faq.cta}
           </Button>

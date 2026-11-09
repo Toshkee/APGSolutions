@@ -12,8 +12,7 @@ function SideCard({ side, dark, id, href }: { side: Side; dark: boolean; id: str
         dark ? "bg-navy text-white" : "border border-line bg-white text-navy"
       }`}
     >
-      <p className={`text-[13px] font-bold tracking-[2px] uppercase ${dark ? "text-sky" : "text-blue"}`}>{side.eyebrow}</p>
-      <h3 className="display mt-2.5 text-[26px] leading-[1.05] lg:mt-3 lg:text-[38px]">{side.title}</h3>
+      <h3 className="text-[26px] leading-[1.15] font-bold tracking-[-0.02em] lg:text-[36px]">{side.title}</h3>
       <p className={`mt-3 text-[15px] leading-[1.6] lg:mt-3.5 lg:text-[17px] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{side.text}</p>
       <ul className="mt-5 w-full text-[15px] lg:mt-[26px] lg:text-base">
         {side.items.map((item) => (
@@ -40,7 +39,6 @@ export function TwoSides() {
         <Reveal>
           <SectionHeading
             align="center"
-            eyebrow={twoSides.eyebrow}
             title={twoSides.title}
             lead={twoSides.lead}
             leadClassName="max-w-[560px]"

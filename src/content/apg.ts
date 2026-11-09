@@ -1,11 +1,11 @@
 // All landing page copy, taken from the APG Solutions Figma design.
-// The phone number and email are placeholders from the design.
+// The phone number (Nashville 615 area code) and email are placeholders.
 
 export const site = {
   name: "APG Solutions",
   legalName: "APG Solutions Inc.",
-  phone: "(800) 555-0142",
-  phoneHref: "tel:+18005550142",
+  phone: "(615) 555-0142",
+  phoneHref: "tel:+16155550142",
   email: "hello@apgsolutions.com",
   hours: "Mon–Fri, 8am–6pm CT",
   tagline: "Connecting talent. Driving success.",
@@ -20,8 +20,8 @@ export const navLinks = [
 ] as const;
 
 export const hero = {
-  badge: "Nationwide CDL-A recruiting · All 48 states",
-  badgeShort: "Nationwide CDL-A recruiting",
+  badge: "Nashville, TN · CDL-A recruiting in all 48 states",
+  badgeShort: "Nashville, TN · Hiring nationwide",
   title: "Only pay when we put a ",
   titleAccent: "driver in your seat.",
   lead: "APG Solutions connects carriers with pre-screened, road-ready CDL drivers. No retainers, no monthly fees — just qualified drivers who show up and stay.",
@@ -37,7 +37,6 @@ export const stats = [
 ];
 
 export const problem = {
-  eyebrow: "The problem",
   title: "Empty seats cost you every single day.",
   lead: "Every parked truck is lost revenue. Traditional recruiters charge you whether they deliver or not — we don’t.",
   pains: [
@@ -65,18 +64,15 @@ export const problem = {
 };
 
 export const twoSides = {
-  eyebrow: "Two sides. One right match.",
   title: "Built for carriers and drivers.",
   lead: "We match on what actually matters — route, home time, equipment and pay — so both sides win.",
   carriers: {
-    eyebrow: "For Carriers",
     title: "Fill seats with drivers who stay.",
     text: "Tap into a nationwide pool of verified CDL-A drivers, pre-screened to your exact hiring criteria.",
     items: ["MVR, PSP & experience pre-screened", "You interview and make the final call", "Pay only after the driver starts"],
     cta: "Find Drivers →",
   },
   drivers: {
-    eyebrow: "For Drivers",
     title: "Find the road that fits you.",
     text: "One short application. We bring you jobs that match your lanes, home time and pay goals — 100% free.",
     items: ["Never pay a cent to apply", "Clear pay, route & equipment upfront", "Real recruiters, not job-board spam"],
@@ -85,7 +81,6 @@ export const twoSides = {
 };
 
 export const benefits = {
-  eyebrow: "Why APG Solutions",
   title: "Pay-per-driver, done right.",
   lead: "A recruiting partner that only wins when you do.",
   items: [
@@ -99,7 +94,6 @@ export const benefits = {
 };
 
 export const howItWorks = {
-  eyebrow: "How it works",
   title: "From empty seat to driver hired.",
   lead: "Four simple steps. You stay in control the whole way.",
   steps: [
@@ -111,7 +105,6 @@ export const howItWorks = {
 };
 
 export const pricing = {
-  eyebrow: "Simple pricing",
   title: "One flat fee per driver placed.",
   lead: "No retainers. No monthly minimums. You only pay when a qualified driver starts working for you.",
   compare: [
@@ -134,7 +127,6 @@ export const pricing = {
 };
 
 export const driverTypes = {
-  eyebrow: "Driver types",
   title: "Drivers we recruit for.",
   lead: "From OTR to local, dry van to hazmat — we cover every corner of the road.",
   types: [
@@ -156,7 +148,6 @@ export const driverTypes = {
 };
 
 export const faq = {
-  eyebrow: "FAQ",
   title: "Questions? We’ve got answers.",
   lead: "Can’t find what you’re looking for? Our team is one call away.",
   cta: "Talk to a Recruiter",

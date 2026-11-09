@@ -9,7 +9,6 @@ export function DriverTypes() {
         <Reveal>
           <SectionHeading
             align="center"
-            eyebrow={driverTypes.eyebrow}
             title={driverTypes.title}
             lead={driverTypes.lead}
             leadClassName="max-w-[560px]"

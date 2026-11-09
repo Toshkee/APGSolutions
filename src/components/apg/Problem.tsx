@@ -9,7 +9,6 @@ export function Problem() {
       <div className="container-apg flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-20">
         <Reveal className="lg:w-[480px] lg:shrink-0">
           <SectionHeading
-            eyebrow={problem.eyebrow}
             title={problem.title}
             lead={problem.lead}
             titleClassName="lg:max-w-[480px]"

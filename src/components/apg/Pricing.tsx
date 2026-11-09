@@ -9,7 +9,6 @@ export function Pricing() {
       <div className="container-apg flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-20">
         <Reveal className="min-w-0 flex-1">
           <SectionHeading
-            eyebrow={pricing.eyebrow}
             title={pricing.title}
             lead={pricing.lead}
             titleClassName="lg:max-w-[620px]"
@@ -27,11 +26,11 @@ export function Pricing() {
 
         <Reveal delay={0.12} className="w-full lg:w-[520px] lg:shrink-0">
           <div className="flex flex-col items-start rounded-[18px] border-2 border-blue bg-white p-6 shadow-[0_20px_50px_rgba(21,87,230,0.16)] lg:rounded-[22px] lg:p-11 lg:shadow-[0_30px_70px_rgba(21,87,230,0.18)]">
-            <p className="rounded-full bg-pill px-3.5 py-[7px] text-[13px] font-bold tracking-[1px] text-blue uppercase">
+            <p className="rounded-full bg-pill px-3.5 py-[7px] text-[13px] font-bold text-blue">
               {card.pill}
             </p>
             <p className="mt-4 flex items-baseline gap-2.5 lg:mt-5">
-              <span className="display text-[44px] leading-none lg:text-[64px]">{card.price}</span>
+              <span className="text-[44px] leading-none font-extrabold tracking-[-0.03em] lg:text-[60px]">{card.price}</span>
               <span className="text-lg font-semibold text-muted lg:text-xl">{card.unit}</span>
             </p>
             <p className="mt-1.5 text-sm text-muted lg:text-[15px]">{card.note}</p>

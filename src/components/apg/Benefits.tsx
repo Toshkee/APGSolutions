@@ -8,7 +8,7 @@ export function Benefits() {
     <section className="py-16 lg:py-[110px]">
       <div className="container-apg">
         <Reveal>
-          <SectionHeading eyebrow={benefits.eyebrow} title={benefits.title} lead={benefits.lead} />
+          <SectionHeading title={benefits.title} lead={benefits.lead} />
         </Reveal>
         <ul className="mt-8 grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-y-12">
           {benefits.items.map((b, i) => (
