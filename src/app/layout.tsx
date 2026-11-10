@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Saira } from "next/font/google";
 import { MotionProvider } from "@/components/MotionProvider";
+import { Footer } from "@/components/apg/Footer";
+import { MobileCtaBar } from "@/components/apg/MobileCtaBar";
+import { Nav } from "@/components/apg/Nav";
 import { site } from "@/content/apg";
 import "./globals.css";
 
@@ -17,7 +20,10 @@ const saira = Saira({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} | Pay-Per-Driver CDL Recruiting`,
+  title: {
+    default: `${site.name} | Pay-Per-Driver CDL Recruiting`,
+    template: `%s | ${site.name}`,
+  },
   description:
     "Only pay when we put a driver in your seat. Pre-screened, road-ready CDL drivers for carriers nationwide. No retainers, no monthly fees.",
 };
@@ -30,7 +36,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${saira.variable} antialiased`}>
       <body>
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          <Nav />
+          {children}
+          <Footer />
+          <MobileCtaBar />
+        </MotionProvider>
       </body>
     </html>
   );

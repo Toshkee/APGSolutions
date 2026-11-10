@@ -8,8 +8,10 @@ function SideCard({ side, dark, id, href }: { side: Side; dark: boolean; id: str
   return (
     <article
       id={id}
-      className={`flex h-full scroll-mt-(--nav-h) flex-col items-start rounded-[18px] p-6 lg:rounded-[20px] lg:p-12 ${
-        dark ? "bg-navy text-white" : "border border-line bg-white text-navy"
+      className={`flex h-full scroll-mt-(--nav-h) flex-col items-start rounded-[18px] p-6 transition duration-300 hover:-translate-y-1 lg:rounded-[20px] lg:p-12 ${
+        dark
+          ? "bg-navy text-white hover:shadow-[0_24px_50px_-24px_rgba(11,27,63,0.7)]"
+          : "border border-line bg-white text-navy hover:border-blue/30 hover:shadow-[0_24px_50px_-28px_rgba(21,87,230,0.45)]"
       }`}
     >
       <h3 className="text-[26px] leading-[1.15] font-bold tracking-[-0.02em] lg:text-[36px]">{side.title}</h3>
@@ -34,7 +36,7 @@ function SideCard({ side, dark, id, href }: { side: Side; dark: boolean; id: str
 
 export function TwoSides() {
   return (
-    <section className="bg-surface py-16 lg:py-[110px]">
+    <section id="solutions" className="bg-surface py-16 lg:py-[110px]">
       <div className="container-apg">
         <Reveal>
           <SectionHeading

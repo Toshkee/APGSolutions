@@ -83,12 +83,13 @@ export function LeadForm() {
   const [type, setType] = useState<LeadType>("carrier");
   const [state, formAction, pending] = useActionState(submitLead, initial);
 
-  // "#apply" links open the driver tab, "#get-started" the carrier tab
+  // "#apply" links open the driver tab, "#get-started" the carrier tab (also when arriving from another page)
   useEffect(() => {
     const onHash = () => {
       if (window.location.hash === "#apply") setType("driver");
       if (window.location.hash === "#get-started") setType("carrier");
     };
+    onHash();
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);

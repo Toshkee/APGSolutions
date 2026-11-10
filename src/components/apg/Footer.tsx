@@ -1,5 +1,7 @@
 import { footer, site } from "@/content/apg";
-import { Logo } from "./Logo";
+import Image from "next/image";
+import Link from "next/link";
+import logoWhite from "../../../public/apg/logo-apg-solutions-white.png";
 
 export function Footer() {
   return (
@@ -7,9 +9,10 @@ export function Footer() {
       <div className="container-apg">
         <div className="flex flex-col gap-7 border-white/10 lg:flex-row lg:gap-20 lg:border-b lg:pb-14">
           <div className="flex flex-col gap-7 lg:w-[360px] lg:shrink-0 lg:gap-[22px]">
-            <a href="#top" className="self-start rounded-xl bg-white px-3 py-2 lg:rounded-[14px] lg:px-4 lg:py-2.5" aria-label="APG Solutions home">
-              <Logo className="w-[130px] lg:w-[158px]" />
-            </a>
+            <Link href="/#top" className="self-start" aria-label="APG Solutions home">
+              {/* White version of the logo, generated from the JPG until the designer sends a vector one */}
+              <Image src={logoWhite} alt="APG Solutions Inc." className="h-auto w-[150px] lg:w-[180px]" />
+            </Link>
             <p className="text-sm leading-[1.6] lg:text-[15px]">
               <span className="lg:hidden">{footer.blurbShort}</span>
               <span className="hidden lg:inline">{footer.blurb}</span>
@@ -25,13 +28,24 @@ export function Footer() {
               >
                 <p className="text-[13px] font-bold tracking-[1px] text-white uppercase lg:mb-1 lg:text-[15px]">{col.title}</p>
                 {col.links.map((l) => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    className={`text-sm transition-colors hover:text-white lg:text-[15px] ${"desktopOnly" in l && l.desktopOnly ? "hidden lg:block" : ""}`}
-                  >
-                    {l.label}
-                  </a>
+                  // Hash links stay plain <a> so the form's "hashchange" tab switch still fires
+                  l.href.includes("#") ? (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      className={`text-sm transition-colors hover:text-white lg:text-[15px] ${"desktopOnly" in l && l.desktopOnly ? "hidden lg:block" : ""}`}
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={l.label}
+                      href={l.href}
+                      className={`text-sm transition-colors hover:text-white lg:text-[15px] ${"desktopOnly" in l && l.desktopOnly ? "hidden lg:block" : ""}`}
+                    >
+                      {l.label}
+                    </Link>
+                  )
                 ))}
               </nav>
             ))}

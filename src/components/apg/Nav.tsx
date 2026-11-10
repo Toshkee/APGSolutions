@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { navLinks, site } from "@/content/apg";
 import { easeOut } from "../Reveal";
@@ -9,6 +11,9 @@ import { Button, Svg } from "./ui";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  // Only real pages get an active state; "/#section" links don't
+  const isActive = (href: string) => !href.includes("#") && pathname.startsWith(href);
 
   useEffect(() => {
     if (!open) return;
@@ -22,16 +27,25 @@ export function Nav() {
       className="fixed inset-x-0 top-0 z-50 border-b border-line-soft bg-white pt-[env(safe-area-inset-top)] text-navy shadow-[0_8px_30px_-18px_rgba(11,27,63,0.35)]"
     >
       <div className="container-apg flex h-(--nav-h) items-center justify-between gap-6">
-        <a href="#top" aria-label="APG Solutions home" onClick={() => setOpen(false)}>
+        <Link href="/#top" aria-label="APG Solutions home" onClick={() => setOpen(false)}>
           <Logo priority className="w-[110px] lg:w-[150px]" />
-        </a>
+        </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-6 text-[15px] font-semibold whitespace-nowrap lg:flex xl:gap-9">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="group relative transition-colors">
+            <Link
+              key={l.href}
+              href={l.href}
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className="group relative transition-colors"
+            >
               {l.label}
-              <span className="absolute inset-x-0 -bottom-1.5 h-0.5 origin-left scale-x-0 rounded-full bg-amber transition-transform duration-300 group-hover:scale-x-100" />
-            </a>
+              <span
+                className={`absolute inset-x-0 -bottom-1.5 h-0.5 origin-left rounded-full bg-amber transition-transform duration-300 group-hover:scale-x-100 ${
+                  isActive(l.href) ? "scale-x-100" : "scale-x-0"
+                }`}
+              />
+            </Link>
           ))}
         </nav>
 
@@ -40,7 +54,7 @@ export function Nav() {
             <Svg src="/apg/icon-phone.svg" w={18} h={18} />
             {site.phone}
           </a>
-          <Button href="#get-started" size="sm">
+          <Button href="/#get-started" size="sm">
             Get Started
           </Button>
         </div>
@@ -76,20 +90,21 @@ export function Nav() {
           >
             <div className="container-apg flex flex-col pt-2 pb-6">
               {navLinks.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
+                  aria-current={isActive(l.href) ? "page" : undefined}
                   onClick={() => setOpen(false)}
-                  className="border-b border-line-soft py-4 text-[17px] font-semibold"
+                  className={`border-b border-line-soft py-4 text-[17px] font-semibold ${isActive(l.href) ? "text-blue" : ""}`}
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
               <a href={site.phoneHref} className="mt-5 flex items-center gap-2 text-base font-bold">
                 <Svg src="/apg/icon-phone.svg" w={18} h={18} />
                 {site.phone}
               </a>
-              <Button href="#get-started" className="mt-5 w-full" onClick={() => setOpen(false)}>
+              <Button href="/#get-started" className="mt-5 w-full" onClick={() => setOpen(false)}>
                 Get Started
               </Button>
             </div>

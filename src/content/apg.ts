@@ -11,12 +11,14 @@ export const site = {
   tagline: "Connecting talent. Driving success.",
 };
 
+// Home sections are linked as "/#id" so they also work from other pages
 export const navLinks = [
-  { label: "For Carriers", href: "#carriers" },
-  { label: "For Drivers", href: "#drivers" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  // One link for the carriers/drivers section: both cards sit side by side there
+  { label: "Carriers & Drivers", href: "/#solutions" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/#faq" },
 ] as const;
 
 export const hero = {
@@ -186,30 +188,62 @@ export const footer = {
     {
       title: "Carriers",
       links: [
-        { label: "Find Drivers", href: "#get-started" },
-        { label: "Pricing", href: "#pricing" },
-        { label: "How It Works", href: "#how-it-works" },
-        { label: "Carrier Review", href: "#get-started", desktopOnly: true },
+        { label: "Find Drivers", href: "/#get-started" },
+        { label: "Pricing", href: "/#pricing" },
+        { label: "How It Works", href: "/#how-it-works" },
+        { label: "Carrier Review", href: "/#get-started", desktopOnly: true },
       ],
     },
     {
       title: "Drivers",
       links: [
-        { label: "Apply Now", href: "#apply" },
-        { label: "Driver Jobs", href: "#drivers" },
-        { label: "Why It’s Free", href: "#faq", desktopOnly: true },
-        { label: "Resources", href: "#faq" },
+        { label: "Apply Now", href: "/#apply" },
+        { label: "Driver Jobs", href: "/#drivers" },
+        { label: "Why It’s Free", href: "/#faq", desktopOnly: true },
+        { label: "Resources", href: "/#faq" },
       ],
     },
     {
       title: "Company",
       desktopOnly: true,
       links: [
-        { label: "About Us", href: "#carriers" },
-        { label: "FAQ", href: "#faq" },
-        { label: "Contact", href: "#get-started" },
-        { label: "Careers", href: "#get-started" },
+        { label: "About Us", href: "/about" },
+        { label: "FAQ", href: "/#faq" },
+        { label: "Contact", href: "/#get-started" },
+        { label: "Our Team", href: "/about#team" },
       ],
     },
   ],
+};
+
+// PLACEHOLDER team: names, roles and bios are made up for the prototype. Swap in the real people
+// (and add `photo: "/team/name.jpg"`) when the client sends them.
+export const team = {
+  title: "Meet the team.",
+  lead: "Real recruiters in Nashville who pick up the phone, not a call center.",
+  previewCta: "More about APG →",
+  members: [
+    { name: "Jordan Hayes", role: "Founder & CEO", bio: "Spent a decade on the carrier side before starting APG to fix how drivers get hired." },
+    { name: "Marcus Reed", role: "Head of Recruiting", bio: "Runs the recruiting desk and knows what makes a driver stay past week two." },
+    { name: "Alicia Moore", role: "Carrier Success Manager", bio: "Your main contact: learns your lanes, equipment and hiring criteria." },
+    { name: "Tyler Brooks", role: "Senior Driver Recruiter", bio: "Talks with drivers every day and matches them to jobs that fit their home time." },
+  ] as { name: string; role: string; bio: string; photo?: string }[],
+};
+
+// PLACEHOLDER copy for the About page until the client sends their own
+export const about = {
+  metaTitle: "About Us",
+  metaDescription:
+    "APG Solutions is a Nashville, TN CDL recruiting company. We help carriers in all 48 states hire pre-screened drivers and only get paid when a driver starts.",
+  badge: "About APG Solutions",
+  title: "Nashville-built. ",
+  titleAccent: "Driver-first.",
+  lead: "APG Solutions is a CDL recruiting company based in Nashville, Tennessee. We help carriers in all 48 states fill their trucks with pre-screened drivers, and we only get paid when a driver starts.",
+  story: {
+    title: "Recruiting that works the way trucking does.",
+    paragraphs: [
+      "We started APG Solutions after watching carriers pay big retainers to recruiters who never filled a seat. Trucking runs on results, so our pricing does too: one flat fee per driver, tied to how long they stay.",
+      "Our team works out of Nashville and talks with drivers every day. We learn your lanes, equipment and culture, then send you people who fit, not a stack of resumes.",
+    ],
+  },
 };
