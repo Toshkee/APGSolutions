@@ -12,8 +12,9 @@ const rise: Variants = {
 };
 
 export function Hero() {
+  // Desktop: at least one full screen tall, so nothing white peeks in under it on first load
   return (
-    <section className="relative overflow-hidden bg-deep lg:flex lg:h-[calc(780px+var(--nav-h))] lg:items-center lg:bg-navy">
+    <section className="relative overflow-hidden bg-deep lg:flex lg:min-h-[max(calc(780px+var(--nav-h)),100svh)] lg:items-center lg:bg-navy">
       {/* Nashville skyline video: a band on phones, full background on desktop (starts under the fixed white nav) */}
       <div aria-hidden="true" className="relative h-[calc(280px+var(--nav-h))] overflow-hidden lg:absolute lg:inset-0 lg:h-auto">
         <motion.div
@@ -37,7 +38,8 @@ export function Hero() {
           </video>
         </motion.div>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,18,50,0.55)_0%,rgba(6,18,50,0.15)_35%,rgba(6,18,50,0.15)_65%,#061232_100%)] lg:hidden" />
-        <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(6,18,50,0)_0%,rgba(6,18,50,0)_75%,rgba(11,27,63,0.95)_100%),linear-gradient(90deg,rgba(6,18,50,0.97)_0%,rgba(10,31,85,0.85)_40%,rgba(11,36,99,0.3)_62%,rgba(11,36,99,0.05)_100%)] lg:block" />
+        {/* Fades fully into the navy of the stats band below, so there is no visible edge */}
+        <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(11,27,63,0)_0%,rgba(11,27,63,0)_55%,rgba(11,27,63,0.85)_85%,#0b1b3f_100%),linear-gradient(90deg,rgba(6,18,50,0.97)_0%,rgba(10,31,85,0.85)_40%,rgba(11,36,99,0.3)_62%,rgba(11,36,99,0.05)_100%)] lg:block" />
       </div>
 
       <div className="container-apg relative pt-2 pb-14 lg:pt-[calc(96px+var(--nav-h))] lg:pb-[120px]">

@@ -21,9 +21,9 @@ export function Problem() {
             {problem.pains.map((p, i) => (
               <li
                 key={p.title}
-                className={`flex gap-4 px-6 py-6 lg:gap-6 lg:px-9 lg:py-7 ${i > 0 ? "border-t border-line-soft" : ""}`}
+                className={`group flex gap-4 px-6 py-6 transition-colors duration-300 hover:bg-white lg:gap-6 lg:px-9 lg:py-7 ${i > 0 ? "border-t border-line-soft" : ""}`}
               >
-                <span className="mt-0.5 grid size-10 shrink-0 place-items-center rounded-full bg-danger-soft lg:size-11">
+                <span className="mt-0.5 grid size-10 shrink-0 place-items-center rounded-full bg-danger-soft transition-transform duration-300 group-hover:scale-110 lg:size-11">
                   <Svg src={p.icon.src} w={p.icon.w} h={p.icon.h} className="scale-90" />
                 </span>
                 <div className="min-w-0">

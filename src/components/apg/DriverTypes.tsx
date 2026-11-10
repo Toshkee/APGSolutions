@@ -20,7 +20,7 @@ export function DriverTypes() {
             {driverTypes.types.map((t) => (
               <li
                 key={t}
-                className="flex items-center gap-2 rounded-full border border-line-input bg-white px-3.5 py-2.5 text-sm font-semibold transition-colors hover:border-blue/40 lg:gap-2.5 lg:px-6 lg:py-3.5 lg:text-base"
+                className="flex items-center gap-2 rounded-full border border-line-input bg-white px-3.5 py-2.5 text-sm font-semibold transition duration-200 hover:-translate-y-0.5 hover:border-blue/50 hover:text-blue hover:shadow-[0_8px_18px_-10px_rgba(21,87,230,0.45)] lg:gap-2.5 lg:px-6 lg:py-3.5 lg:text-base"
               >
                 <Svg src="/apg/chip-dot.svg" w={8} h={8} />
                 {t}

@@ -8,7 +8,25 @@ export function Svg({ src, w, h, className = "" }: { src: string; w: number; h: 
   );
 }
 
-type ButtonStyle = "primary" | "dark" | "outline";
+// Same SVG used as a mask, so it takes the current text color and can change color on hover
+export function MaskIcon({ src, size, className = "" }: { src: string; size: number; className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`block shrink-0 bg-current ${className}`}
+      style={{
+        width: size,
+        height: size,
+        maskImage: `url(${src})`,
+        maskSize: "contain",
+        maskRepeat: "no-repeat",
+        maskPosition: "center",
+      }}
+    />
+  );
+}
+
+type ButtonStyle ="primary" | "dark" | "outline";
 
 const buttonStyles: Record<ButtonStyle, string> = {
   // Amber is the action color; blue stays the brand color
