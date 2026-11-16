@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
 import { submitLead, type LeadState, type LeadType } from "@/app/actions";
 import { cta } from "@/content/apg";
 import { easeOut } from "../Reveal";
@@ -210,7 +211,12 @@ export function LeadForm() {
                 <rect x="4" y="11" width="16" height="10" rx="2" />
                 <path d="M8 11V7a4 4 0 0 1 8 0v4" />
               </svg>
-              {cta.form.privacy}
+              <span>
+                {cta.form.privacy}{" "}
+                <Link href="/privacy" className="underline underline-offset-2 hover:text-body">
+                  {cta.form.privacyLink}
+                </Link>
+              </span>
             </p>
           </motion.form>
         )}

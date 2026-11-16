@@ -177,7 +177,9 @@ export const cta = {
   form: {
     title: "Get matched in 48 hours",
     lead: "Tell us who you are — it takes under 2 minutes.",
-    privacy: "Your information is never shared or sold.",
+    // Driver details do go to matching carriers, so the note only promises "never sold" (see /privacy)
+    privacy: "Your information is never sold.",
+    privacyLink: "Privacy Policy",
   },
 };
 
