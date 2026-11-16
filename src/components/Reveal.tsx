@@ -9,14 +9,15 @@ type RevealProps = HTMLMotionProps<"div"> & {
   y?: number;
 };
 
-// Fades and lifts its children in once they scroll into view
-export function Reveal({ delay = 0, y = 28, children, ...rest }: RevealProps) {
+// Fades and lifts its children in once they scroll into view. Kept short and small so fast scrolling
+// never shows half-faded content; it starts a little before the block is fully on screen.
+export function Reveal({ delay = 0, y = 14, children, ...rest }: RevealProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
-      transition={{ duration: 0.8, ease: easeOut, delay }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: 0.5, ease: easeOut, delay }}
       {...rest}
     >
       {children}

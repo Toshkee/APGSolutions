@@ -13,7 +13,7 @@ export function Benefits() {
         <ul className="mt-8 grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-y-12">
           {benefits.items.map((b, i) => (
             <li key={b.title}>
-              <Reveal delay={0.06 * (i % 3)} className="group border-t-2 border-line pt-6 transition-colors duration-300 hover:border-blue">
+              <Reveal delay={0.05 * (i % 3)} className="group border-t-2 border-line pt-6 transition-colors duration-300 hover:border-blue">
                 <div className="flex items-center gap-3.5">
                   <span className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-pill text-blue ring-1 ring-blue/10 transition duration-300 group-hover:-translate-y-0.5 group-hover:bg-blue group-hover:text-white group-hover:shadow-[0_10px_20px_-8px_rgba(21,87,230,0.6)]">
                     <MaskIcon src={b.icon.src} size={24} />

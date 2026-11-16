@@ -1,4 +1,5 @@
 import { stats } from "@/content/apg";
+import { CountUp } from "../CountUp";
 import { Reveal } from "../Reveal";
 
 export function Stats() {
@@ -8,7 +9,7 @@ export function Stats() {
       className="bg-surface py-8 lg:bg-[linear-gradient(180deg,#0b1b3f_0%,#0b1b3f_40%,#ffffff_40.01%,#ffffff_100%)] lg:py-0"
     >
       <div className="container-apg">
-        <Reveal y={20}>
+        <Reveal y={12}>
           <dl className="grid grid-cols-2 overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_rgba(11,27,63,0.1)] lg:grid-cols-4 lg:rounded-[18px] lg:shadow-[0_20px_60px_rgba(11,27,63,0.14)]">
             {stats.map((s, i) => (
               <div
@@ -22,7 +23,7 @@ export function Stats() {
                   <span className="hidden lg:inline">{s.label}</span>
                 </dt>
                 <dd className="text-[32px] leading-none font-extrabold tracking-[-0.03em] text-blue lg:text-[44px]">
-                  {s.value}
+                  <CountUp value={s.value} />
                 </dd>
               </div>
             ))}

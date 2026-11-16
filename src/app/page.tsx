@@ -10,18 +10,19 @@ import { Stats } from "@/components/apg/Stats";
 import { Team } from "@/components/apg/Team";
 import { TwoSides } from "@/components/apg/TwoSides";
 
+// Problem → who it's for → how it works → why us → price → people → questions → form
 export default function Home() {
   return (
     <>
       <main id="top">
         <Hero />
         <Stats />
+        <DriverTypes />
         <Problem />
         <TwoSides />
-        <Benefits />
         <HowItWorks />
+        <Benefits />
         <Pricing />
-        <DriverTypes />
         <Team variant="preview" />
         <Faq />
         <Cta />

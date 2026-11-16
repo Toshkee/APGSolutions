@@ -5,7 +5,7 @@ import { Button, CheckItem, SectionHeading, Svg } from "./ui";
 export function Pricing() {
   const { card } = pricing;
   return (
-    <section id="pricing" className="py-16 lg:py-[110px]">
+    <section id="pricing" className="bg-surface py-16 lg:py-[110px]">
       <div className="container-apg flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-20">
         <Reveal className="min-w-0 flex-1">
           <SectionHeading

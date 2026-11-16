@@ -66,7 +66,7 @@ export function Team({ variant }: { variant: "preview" | "full" }) {
         <ul className={`mt-8 grid gap-3.5 lg:mt-14 lg:grid-cols-4 lg:gap-7 ${full ? "sm:grid-cols-2" : "grid-cols-2"}`}>
           {team.members.map((m, i) => (
             <li key={m.name}>
-              <Reveal delay={0.08 * i} className="h-full">
+              <Reveal delay={0.05 * i} className="h-full">
                 <MemberCard m={m} withBio={full} />
               </Reveal>
             </li>

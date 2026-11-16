@@ -9,7 +9,7 @@ export function Cta() {
       {/* "#apply" links land here too and switch the form to the driver tab */}
       <span id="apply" className="block scroll-mt-(--nav-h)" aria-hidden="true" />
       <div className="container-apg">
-        <Reveal y={36}>
+        <Reveal y={20}>
           <div className="flex flex-col gap-7 overflow-hidden rounded-[20px] bg-[linear-gradient(90deg,#0b2463_0%,#1557e6_100%)] px-[18px] pt-8 pb-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:rounded-[26px] lg:py-16 lg:pr-16 lg:pl-[72px]">
             <div className="flex flex-col gap-3 lg:max-w-[500px] lg:gap-5">
               <h2 className="display text-[30px] leading-[1.02] text-white lg:text-[54px]">{cta.title}</h2>

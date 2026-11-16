@@ -1,33 +1,36 @@
 import { driverTypes } from "@/content/apg";
-import { Reveal } from "../Reveal";
-import { SectionHeading, Svg } from "./ui";
+import { Svg } from "./ui";
 
+function Chips({ copy = false }: { copy?: boolean }) {
+  return (
+    <ul aria-hidden={copy || undefined} className={`flex shrink-0 gap-2.5 pr-2.5 lg:gap-3 lg:pr-3 ${copy ? "marquee-copy" : ""}`}>
+      {driverTypes.types.map((t) => (
+        <li
+          key={t}
+          className="flex items-center gap-2 rounded-full border border-line-input bg-white px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-colors duration-200 hover:border-blue/50 hover:text-blue lg:gap-2.5 lg:px-5 lg:py-3 lg:text-[15px]"
+        >
+          <Svg src="/apg/chip-dot.svg" w={8} h={8} />
+          {t}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// A slim ticker instead of a full section: the list slides past on its own and pauses on hover
 export function DriverTypes() {
   return (
-    <section className="bg-surface py-16 lg:py-[110px]">
-      <div className="container-apg">
-        <Reveal>
-          <SectionHeading
-            align="center"
-            title={driverTypes.title}
-            lead={driverTypes.lead}
-            leadClassName="max-w-[560px]"
-            leadDesktopOnly
-          />
-        </Reveal>
-        <Reveal delay={0.1}>
-          <ul className="mt-7 flex flex-wrap justify-center gap-2 lg:mt-11 lg:gap-3.5">
-            {driverTypes.types.map((t) => (
-              <li
-                key={t}
-                className="flex items-center gap-2 rounded-full border border-line-input bg-white px-3.5 py-2.5 text-sm font-semibold transition duration-200 hover:-translate-y-0.5 hover:border-blue/50 hover:text-blue hover:shadow-[0_8px_18px_-10px_rgba(21,87,230,0.45)] lg:gap-2.5 lg:px-6 lg:py-3.5 lg:text-base"
-              >
-                <Svg src="/apg/chip-dot.svg" w={8} h={8} />
-                {t}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+    <section aria-labelledby="driver-types-title" className="py-10 lg:py-14">
+      <div className="container-apg flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
+        <h2 id="driver-types-title" className="shrink-0 text-center text-[17px] font-bold lg:text-left lg:text-[19px]">
+          {driverTypes.title}
+        </h2>
+        <div className="marquee -mx-6 min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] md:mx-0">
+          <div className="marquee-track flex w-max">
+            <Chips />
+            <Chips copy />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -5,6 +5,8 @@ import { Team } from "@/components/apg/Team";
 import { SectionHeading, Svg } from "@/components/apg/ui";
 import { about } from "@/content/apg";
 import poster from "../../../public/media/nashville-hero-poster.jpg";
+// Placeholder photo (Unsplash, free license): semi-truck on the highway at dusk
+import highwayDusk from "../../../public/photos/highway-dusk.jpg";
 
 export const metadata: Metadata = {
   title: about.metaTitle,
@@ -16,7 +18,7 @@ export default function AboutPage() {
     <main id="top">
       {/* Page header: same Nashville still as the home hero, darker */}
       <section className="relative overflow-hidden bg-navy pt-(--nav-h)">
-        <Image src={poster} alt="" aria-hidden="true" fill priority sizes="100vw" className="object-cover object-[60%_center] opacity-35" />
+        <Image src={poster} alt="" aria-hidden="true" fill preload sizes="100vw" className="object-cover object-[60%_center] opacity-35" />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,50,0.95)_0%,rgba(10,31,85,0.75)_55%,rgba(11,36,99,0.35)_100%)]"
@@ -36,7 +38,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Short company story next to a Nashville photo */}
+      {/* Short company story next to a trucking photo */}
       <section className="py-16 lg:py-[110px]">
         <div className="container-apg flex flex-col gap-9 lg:flex-row lg:items-center lg:gap-20">
           <Reveal className="lg:w-[520px] lg:shrink-0">
@@ -49,7 +51,14 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1} className="min-w-0 flex-1">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] shadow-[0_24px_60px_-30px_rgba(11,27,63,0.55)] lg:rounded-[22px]">
-              <Image src={poster} alt="Downtown Nashville at dusk" fill sizes="(width >= 64rem) 600px, 100vw" className="object-cover" />
+              <Image
+                src={highwayDusk}
+                alt="Semi-truck driving on a highway at dusk"
+                fill
+                sizes="(width >= 64rem) 600px, 100vw"
+                placeholder="blur"
+                className="object-cover"
+              />
             </div>
           </Reveal>
         </div>

@@ -94,3 +94,39 @@ h3 {
     scroll-behavior: auto;
   }
 }
+
+/* Driver types ticker: the list is rendered twice, so sliding it by half loops seamlessly */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 45s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Without motion the list just wraps onto a few centered lines */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    mask-image: none !important;
+  }
+  .marquee-track {
+    animation: none;
+    width: auto;
+    justify-content: center;
+  }
+  .marquee-track > ul:first-child {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
+    flex-shrink: 1;
+  }
+  .marquee-copy {
+    display: none;
+  }
+}

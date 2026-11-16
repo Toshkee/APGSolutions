@@ -1,39 +1,51 @@
 import { problem } from "@/content/apg";
+import { ParallaxImage } from "../ParallaxImage";
 import { Reveal } from "../Reveal";
 import { SectionHeading, Svg } from "./ui";
+import idleTrailers from "../../../public/photos/idle-trailers.jpg";
 
-// One panel with divided rows instead of four identical cards
+// Full-width dark band over a photo of parked trailers: the one "problem" moment on the page,
+// so it looks different from the light text-and-list sections around it
 export function Problem() {
   return (
-    <section className="py-16 lg:py-[110px]">
-      <div className="container-apg flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-20">
-        <Reveal className="lg:w-[480px] lg:shrink-0">
+    <section className="relative isolate overflow-hidden bg-deep py-16 lg:py-[120px]">
+      {/* Placeholder photo (Unsplash, free license): aerial view of parked trailers */}
+      <ParallaxImage src={idleTrailers} sizes="100vw" className="opacity-45" strength={16} />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,18,50,0.92)_0%,rgba(6,18,50,0.7)_45%,rgba(6,18,50,0.95)_100%)]"
+      />
+
+      <div className="container-apg relative">
+        <Reveal>
           <SectionHeading
+            tone="dark"
             title={problem.title}
             lead={problem.lead}
-            titleClassName="lg:max-w-[480px]"
-            leadClassName="lg:max-w-[460px]"
+            titleClassName="lg:max-w-[720px]"
+            leadClassName="lg:max-w-[600px]"
           />
         </Reveal>
 
-        <Reveal delay={0.1} className="min-w-0 flex-1">
-          <ul className="overflow-hidden rounded-[18px] border border-line-soft bg-surface">
-            {problem.pains.map((p, i) => (
-              <li
-                key={p.title}
-                className={`group flex gap-4 px-6 py-6 transition-colors duration-300 hover:bg-white lg:gap-6 lg:px-9 lg:py-7 ${i > 0 ? "border-t border-line-soft" : ""}`}
+        <ul className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-5">
+          {problem.pains.map((p, i) => (
+            <li key={p.title}>
+              <Reveal
+                delay={0.07 * i}
+                className="group flex h-full gap-4 rounded-[18px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#e5484d]/40 hover:bg-white/[0.09] sm:block lg:p-7"
               >
-                <span className="mt-0.5 grid size-10 shrink-0 place-items-center rounded-full bg-danger-soft transition-transform duration-300 group-hover:scale-110 lg:size-11">
+                {/* icon beside the text on phones, above it from sm up */}
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e5484d]/15 ring-1 ring-[#e5484d]/25 transition-transform duration-300 group-hover:scale-110 sm:size-11">
                   <Svg src={p.icon.src} w={p.icon.w} h={p.icon.h} className="scale-90" />
                 </span>
                 <div className="min-w-0">
-                  <h3 className="text-[17px] font-bold lg:text-[19px]">{p.title}</h3>
-                  <p className="mt-1 text-[15px] leading-[1.6] text-muted lg:text-[15.5px]">{p.text}</p>
+                  <h3 className="text-[17px] font-bold text-white sm:mt-4 lg:mt-5 lg:text-[19px]">{p.title}</h3>
+                  <p className="mt-1 text-[15px] leading-[1.6] text-on-dark-muted sm:mt-1.5">{p.text}</p>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
