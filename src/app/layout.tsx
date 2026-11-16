@@ -34,7 +34,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${saira.variable} antialiased`}>
+    // data-scroll-behavior: Next 16 no longer pauses the CSS smooth scroll on page changes, so without it a new page
+    // opened from far down would visibly scroll up to the top. In-page "#section" jumps stay smooth.
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${saira.variable} antialiased`}>
       <body>
         <MotionProvider>
           <Nav />

@@ -211,9 +211,10 @@ export function LeadForm() {
                 <rect x="4" y="11" width="16" height="10" rx="2" />
                 <path d="M8 11V7a4 4 0 0 1 8 0v4" />
               </svg>
-              <span>
+              <span className="text-center">
                 {cta.form.privacy}{" "}
-                <Link href="/privacy" className="underline underline-offset-2 hover:text-body">
+                {/* nowrap so "Privacy Policy" never splits across two lines on phones */}
+                <Link href="/privacy" className="whitespace-nowrap underline underline-offset-2 hover:text-body">
                   {cta.form.privacyLink}
                 </Link>
               </span>
