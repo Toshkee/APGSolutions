@@ -30,17 +30,18 @@ export function Problem() {
         <ul className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-5">
           {problem.pains.map((p, i) => (
             <li key={p.title}>
-              <Reveal
-                delay={0.07 * i}
-                className="group flex h-full gap-4 rounded-[18px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#e5484d]/40 hover:bg-white/[0.09] sm:block lg:p-7"
-              >
-                {/* icon beside the text on phones, above it from sm up */}
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e5484d]/15 ring-1 ring-[#e5484d]/25 transition-transform duration-300 group-hover:scale-110 sm:size-11">
-                  <Svg src={p.icon.src} w={p.icon.w} h={p.icon.h} className="scale-90" />
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-[17px] font-bold text-white sm:mt-4 lg:mt-5 lg:text-[19px]">{p.title}</h3>
-                  <p className="mt-1 text-[15px] leading-[1.6] text-on-dark-muted sm:mt-1.5">{p.text}</p>
+              {/* Reveal (scroll fade-in) and the hover lift sit on separate elements: if one element had both,
+                  Safari would replay the CSS transition after the fade-in and the card would blink twice */}
+              <Reveal delay={0.07 * i} className="h-full">
+                <div className="group flex h-full gap-4 rounded-[18px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#e5484d]/40 hover:bg-white/[0.09] sm:block lg:p-7">
+                  {/* icon beside the text on phones, above it from sm up */}
+                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e5484d]/15 ring-1 ring-[#e5484d]/25 transition-transform duration-300 group-hover:scale-110 sm:size-11">
+                    <Svg src={p.icon.src} w={p.icon.w} h={p.icon.h} className="scale-90" />
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="text-[17px] font-bold text-white sm:mt-4 lg:mt-5 lg:text-[19px]">{p.title}</h3>
+                    <p className="mt-1 text-[15px] leading-[1.6] text-on-dark-muted sm:mt-1.5">{p.text}</p>
+                  </div>
                 </div>
               </Reveal>
             </li>

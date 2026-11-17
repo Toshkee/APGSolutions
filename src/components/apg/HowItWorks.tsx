@@ -70,27 +70,30 @@ export function HowItWorks() {
           />
           {howItWorks.steps.map((s, i) => (
             <li key={s.title} className="group relative pl-[68px] lg:pt-[76px] lg:pl-0">
-              {/* each icon pops in as the line reaches it */}
+              {/* each icon pops in as the line reaches it. The pop-in (outer) and the hover styles (inner) are on
+                  separate elements, otherwise Safari replays the CSS transition and the icon blinks twice */}
               <motion.span
                 aria-hidden="true"
                 initial={{ scale: 0.4, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: "0px 0px -120px 0px" }}
                 transition={{ type: "spring", stiffness: 260, damping: 18, delay: (DRAW / howItWorks.steps.length) * i }}
-                className="absolute top-0 left-0 z-10 grid size-12 place-items-center rounded-full border border-amber/45 bg-[#0b2463] text-amber shadow-[0_0_0_6px_rgba(245,165,36,0.1)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-amber group-hover:bg-amber group-hover:text-navy group-hover:shadow-[0_0_0_6px_rgba(245,165,36,0.22)]"
+                className="absolute top-0 left-0 z-10 size-12"
               >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {stepIcons[i]}
-                </svg>
+                <span className="grid size-full place-items-center rounded-full border border-amber/45 bg-[#0b2463] text-amber shadow-[0_0_0_6px_rgba(245,165,36,0.1)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-amber group-hover:bg-amber group-hover:text-navy group-hover:shadow-[0_0_0_6px_rgba(245,165,36,0.22)]">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {stepIcons[i]}
+                  </svg>
+                </span>
               </motion.span>
               <Reveal delay={(DRAW / howItWorks.steps.length) * i + 0.1}>
                 <h3 className="pt-2.5 text-[19px] leading-[1.3] font-bold text-white lg:pt-0 lg:text-[21px]">{s.title}</h3>
