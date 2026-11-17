@@ -2,6 +2,8 @@
 // The phone number (Nashville 615 area code) and email are placeholders.
 
 export const site = {
+  // Live address, used for the share preview, robots.txt and sitemap. Change it when the real domain is connected.
+  url: "https://apg-solutions.vercel.app",
   name: "APG Solutions",
   legalName: "APG Solutions Inc.",
   phone: "(615) 555-0142",
@@ -230,6 +232,16 @@ export const team = {
     { name: "Alicia Moore", role: "Carrier Success Manager", bio: "Your main contact: learns your lanes, equipment and hiring criteria." },
     { name: "Tyler Brooks", role: "Senior Driver Recruiter", bio: "Talks with drivers every day and matches them to jobs that fit their home time." },
   ] as { name: string; role: string; bio: string; photo?: string }[],
+};
+
+// 404 page
+export const notFound = {
+  metaTitle: "Page Not Found",
+  badge: "404 · Page not found",
+  title: "Wrong turn.",
+  lead: "This page doesn’t exist or has moved. Let’s get you back on the road.",
+  home: "Back to Home",
+  cta: "Find Drivers →",
 };
 
 // PLACEHOLDER copy for the About page until the client sends their own

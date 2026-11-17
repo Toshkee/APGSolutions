@@ -20,6 +20,12 @@ const saira = Saira({
 });
 
 export const metadata: Metadata = {
+  // Makes the share preview image (app/opengraph-image.jpg) a full URL that WhatsApp, iMessage etc. can load
+  metadataBase: new URL(site.url),
+  // Large preview card on X; it uses the Open Graph image
+  twitter: { card: "summary_large_image" },
+  // No title/description here on purpose: link previews then fall back to each page's own title and description
+  openGraph: { type: "website", siteName: site.name, locale: "en_US" },
   title: {
     default: `${site.name} | Pay-Per-Driver CDL Recruiting`,
     template: `%s | ${site.name}`,
