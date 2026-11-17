@@ -31,9 +31,11 @@ export function Problem() {
           {problem.pains.map((p, i) => (
             <li key={p.title}>
               {/* Reveal (scroll fade-in) and the hover lift sit on separate elements: if one element had both,
-                  Safari would replay the CSS transition after the fade-in and the card would blink twice */}
+                  Safari would replay the CSS transition after the fade-in and the card would blink twice.
+                  The frosted look is a 70% navy tint, not backdrop-blur: browsers (iPhone Safari most of all) skip the
+                  blur while the card slides in and switch it on at the end, so the card visibly changed once settled */}
               <Reveal delay={0.07 * i} className="h-full">
-                <div className="group flex h-full gap-4 rounded-[18px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#e5484d]/40 hover:bg-white/[0.09] sm:block lg:p-7">
+                <div className="group flex h-full gap-4 rounded-[18px] border border-white/10 bg-[rgba(40,51,78,0.7)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#e5484d]/40 hover:bg-[rgba(48,59,86,0.7)] sm:block lg:p-7">
                   {/* icon beside the text on phones, above it from sm up */}
                   <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e5484d]/15 ring-1 ring-[#e5484d]/25 transition-transform duration-300 group-hover:scale-110 sm:size-11">
                     <Svg src={p.icon.src} w={p.icon.w} h={p.icon.h} className="scale-90" />
