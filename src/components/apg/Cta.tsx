@@ -33,7 +33,8 @@ export function Cta() {
 
             <LeadForm />
 
-            <a href={site.phoneHref} className="relative text-center text-[15px] font-bold text-[#d4e0ff] lg:hidden">
+            {/* py-3 with -my-3: 47px tall tap area without moving the text */}
+            <a href={site.phoneHref} className="relative -my-3 py-3 text-center text-[15px] font-bold text-[#d4e0ff] lg:hidden">
               Prefer to talk? Call <span className="whitespace-nowrap">{site.phone}</span>
             </a>
           </div>

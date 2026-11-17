@@ -72,8 +72,9 @@ export function Team({ variant }: { variant: "preview" | "full" }) {
             </li>
           ))}
         </ul>
+        {/* phones: py + smaller margins give a 44px tall tap area while the text stays where it was */}
         {!full && (
-          <Link href="/about#team" className="mt-6 inline-block text-base font-bold text-blue lg:hidden">
+          <Link href="/about#team" className="mt-3.5 -mb-2.5 inline-block py-2.5 text-base font-bold text-blue lg:hidden">
             {team.previewCta}
           </Link>
         )}
