@@ -98,7 +98,7 @@ export function LeadForm() {
   const done = state.status === "success";
 
   return (
-    <div className="flex w-full flex-col rounded-[18px] bg-white p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9 lg:w-[516px] lg:shrink-0">
+    <div className="flex w-full flex-col rounded-[18px] bg-white p-4 min-[360px]:p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9 lg:w-[516px] lg:shrink-0">
       <h3 className="text-[20px] leading-tight font-bold tracking-[-0.02em] text-navy sm:text-[24px]">{cta.form.title}</h3>
       <p className="mt-1.5 text-[15px] text-muted">{cta.form.lead}</p>
 
@@ -145,7 +145,9 @@ export function LeadForm() {
                     role="tab"
                     aria-selected={active}
                     onClick={() => setType(value)}
-                    className={`relative flex-1 rounded-lg py-[11px] text-sm font-bold transition-colors ${
+                    // Below 375px the tabs size to their labels (instead of half each) and drop to 13px under 360px,
+                    // so "I'm hiring drivers" stays on one line down to 320px. From 375px up they are equal halves.
+                    className={`relative flex-auto rounded-lg px-1 py-[11px] text-[13px] font-bold whitespace-nowrap transition-colors min-[360px]:text-sm min-[375px]:flex-1 ${
                       active ? "text-navy" : "text-muted hover:text-navy"
                     }`}
                   >
@@ -197,9 +199,12 @@ export function LeadForm() {
             <button
               type="submit"
               disabled={pending}
-              className="mt-[22px] inline-flex h-[52px] w-full items-center justify-center rounded-[10px] bg-amber px-[26px] text-base font-bold text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] transition hover:-translate-y-px hover:bg-amber-hover disabled:cursor-wait disabled:opacity-70"
+              // Phones: less side padding and 15px text so "Check My Carrier's Fit →" stays on one line down to 320px.
+              // min-h (not a fixed height) so a very large text setting wraps into a taller button instead of clipping.
+              className="mt-[22px] inline-flex min-h-[52px] w-full items-center justify-center rounded-[10px] bg-amber px-4 py-2 text-center text-[15px] font-bold text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] transition hover:-translate-y-px hover:bg-amber-hover disabled:cursor-wait disabled:opacity-70 sm:px-[26px] sm:text-base"
             >
-              {pending ? "Sending…" : type === "carrier" ? "Check My Carrier's Fit →" : "Apply to Drive →"}
+              {/*   keeps the arrow on the same line as the last word */}
+              {pending ? "Sending…" : type === "carrier" ? "Check My Carrier's Fit →" : "Apply to Drive →"}
             </button>
             {state.status === "error" && (
               <p role="alert" className="mt-3 text-center text-[13px] text-[#d92d20]">
