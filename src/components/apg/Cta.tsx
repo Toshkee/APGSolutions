@@ -1,6 +1,7 @@
 import { cta, site } from "@/content/apg";
 import { Reveal } from "../Reveal";
 import { LeadForm } from "./LeadForm";
+import { CtaShader } from "./CtaShader";
 import { CheckItem } from "./ui";
 
 export function Cta() {
@@ -10,8 +11,9 @@ export function Cta() {
       <span id="apply" className="block scroll-mt-(--nav-h)" aria-hidden="true" />
       <div className="container-apg">
         <Reveal y={20}>
-          <div className="flex flex-col gap-7 overflow-hidden rounded-[20px] bg-[linear-gradient(90deg,#0b2463_0%,#1557e6_100%)] px-3 pt-8 min-[360px]:px-[18px] pb-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:rounded-[26px] lg:py-16 lg:pr-16 lg:pl-[72px]">
-            <div className="flex flex-col gap-3 lg:max-w-[500px] lg:gap-5">
+          <div className="relative isolate flex flex-col gap-7 overflow-hidden rounded-[20px] bg-[linear-gradient(90deg,#0b2463_0%,#1557e6_100%)] px-3 pt-8 min-[360px]:px-[18px] pb-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:rounded-[26px] lg:py-16 lg:pr-16 lg:pl-[72px]">
+            <CtaShader />
+            <div className="relative flex flex-col gap-3 lg:max-w-[500px] lg:gap-5">
               <h2 className="display text-[30px] leading-[1.02] text-white lg:text-[54px]">{cta.title}</h2>
               <p className="text-[15px] text-cta-text lg:text-[19px]">
                 <span className="lg:hidden">{cta.leadShort}</span>
@@ -31,7 +33,7 @@ export function Cta() {
 
             <LeadForm />
 
-            <a href={site.phoneHref} className="text-center text-[15px] font-bold text-[#d4e0ff] lg:hidden">
+            <a href={site.phoneHref} className="relative text-center text-[15px] font-bold text-[#d4e0ff] lg:hidden">
               Prefer to talk? Call <span className="whitespace-nowrap">{site.phone}</span>
             </a>
           </div>

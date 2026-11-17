@@ -98,7 +98,7 @@ export function LeadForm() {
   const done = state.status === "success";
 
   return (
-    <div className="flex w-full flex-col rounded-[18px] bg-white p-4 min-[360px]:p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9 lg:w-[516px] lg:shrink-0">
+    <div className="relative flex w-full flex-col rounded-[18px] bg-white p-4 min-[360px]:p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9 lg:w-[516px] lg:shrink-0">
       <h3 className="text-[20px] leading-tight font-bold tracking-[-0.02em] text-navy sm:text-[24px]">{cta.form.title}</h3>
       <p className="mt-1.5 text-[15px] text-muted">{cta.form.lead}</p>
 
@@ -201,7 +201,7 @@ export function LeadForm() {
               disabled={pending}
               // Phones: less side padding and 15px text so "Check My Carrier's Fit →" stays on one line down to 320px.
               // min-h (not a fixed height) so a very large text setting wraps into a taller button instead of clipping.
-              className="mt-[22px] inline-flex min-h-[52px] w-full items-center justify-center rounded-[10px] bg-amber px-4 py-2 text-center text-[15px] font-bold text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] transition hover:-translate-y-px hover:bg-amber-hover disabled:cursor-wait disabled:opacity-70 sm:px-[26px] sm:text-base"
+              className="btn-shine mt-[22px] inline-flex min-h-[52px] w-full items-center justify-center rounded-[10px] bg-amber px-4 py-2 text-center text-[15px] font-bold text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] transition hover:-translate-y-px hover:bg-amber-hover disabled:cursor-wait disabled:opacity-70 sm:px-[26px] sm:text-base"
             >
               {/*   keeps the arrow on the same line as the last word */}
               {pending ? "Sending…" : type === "carrier" ? "Check My Carrier's Fit →" : "Apply to Drive →"}

@@ -31,7 +31,7 @@ type ButtonStyle ="primary" | "dark" | "outline";
 const buttonStyles: Record<ButtonStyle, string> = {
   // Amber is the action color; blue stays the brand color
   primary:
-    "bg-amber text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] hover:bg-amber-hover hover:shadow-[0_10px_20px_rgba(245,165,36,0.45)]",
+    "btn-shine bg-amber text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] hover:bg-amber-hover hover:shadow-[0_10px_20px_rgba(245,165,36,0.45)]",
   dark: "bg-navy text-white hover:bg-[#13285a]",
   outline: "border-[1.5px] border-white/35 text-white hover:border-white/70 hover:bg-white/8",
 };

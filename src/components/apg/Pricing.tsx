@@ -14,14 +14,7 @@ export function Pricing() {
             titleClassName="lg:max-w-[620px]"
             leadClassName="lg:max-w-[600px]"
           />
-          <ul className="mt-[34px] hidden flex-col gap-3.5 lg:flex">
-            {pricing.compare.map((c) => (
-              <li key={c.text} className="flex items-center gap-3.5 text-base font-medium lg:text-[17px]">
-                <Svg src={c.yes ? "/apg/compare-yes.svg" : "/apg/compare-no.svg"} w={26} h={26} />
-                {c.text}
-              </li>
-            ))}
-          </ul>
+          <Compare />
         </Reveal>
 
         <Reveal delay={0.12} className="w-full lg:w-[520px] lg:shrink-0">
@@ -48,5 +41,40 @@ export function Pricing() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+// APG vs retainer recruiters. Phones: each row is a label over two cells. Desktop: a three-column table.
+// The APG column is tinted blue the whole way down, so it reads as the one to pick.
+function Compare() {
+  const { compare } = pricing;
+  return (
+    <div className="mt-8 overflow-hidden rounded-[16px] border border-line bg-white lg:mt-[34px]">
+      <div className="grid grid-cols-2 text-[13px] font-bold tracking-[0.5px] uppercase lg:grid-cols-[0.85fr_1fr_1fr]">
+        <span className="hidden lg:block" />
+        <span className="px-4 py-3.5 text-subtle lg:px-5">{compare.them}</span>
+        <span className="bg-pill px-4 py-3.5 text-blue lg:px-5">{compare.us}</span>
+      </div>
+      <ul>
+        {compare.rows.map((r) => (
+          <li key={r.label} className="grid grid-cols-2 border-t border-line text-[14.5px] leading-[1.45] lg:grid-cols-[0.85fr_1fr_1fr] lg:text-[15px]">
+            <span className="px-4 pt-3.5 text-[12.5px] font-bold tracking-[0.4px] text-label uppercase lg:py-4 lg:pl-5 lg:text-[14px] lg:tracking-normal lg:normal-case">
+              {r.label}
+            </span>
+            {/* phones: the label sits in the left half and this keeps the APG tint running through its row,
+                so the blue column has no white gaps */}
+            <span aria-hidden="true" className="bg-pill lg:hidden" />
+            <span className="flex items-start gap-2 px-4 pt-1.5 pb-3.5 text-muted lg:py-4 lg:pl-5">
+              <Svg src="/apg/compare-no.svg" w={18} h={18} className="mt-px" />
+              {r.them}
+            </span>
+            <span className="flex items-start gap-2 bg-pill px-4 pt-1.5 pb-3.5 font-semibold text-navy lg:py-4 lg:pl-5">
+              <Svg src="/apg/compare-yes.svg" w={18} h={18} className="mt-px" />
+              {r.us}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

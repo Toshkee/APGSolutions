@@ -130,3 +130,90 @@ h3 {
     display: none;
   }
 }
+
+/* Hero accent words: an amber marker stroke draws in under them, left to right, after the headline rises.
+   box-decoration-break: clone gives each wrapped line its own stroke. The line box is ~1.57em tall with the
+   baseline at ~72.5% of it (Saira), so 75–80% puts the stroke just under the letters, clear of the next line. */
+.marker {
+  background-image: linear-gradient(transparent 75%, #f5a524 75%, #f5a524 80%, transparent 80%);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: marker-sweep 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.1s forwards;
+}
+
+@keyframes marker-sweep {
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+/* Amber buttons: a soft light band sweeps across on hover (.btn-shine). The hero's main button also gets it on
+   its own every few seconds (.btn-shine-auto) to draw the eye. Idea from the "Shiny Button" on 21st.dev. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -75%;
+  width: 50%;
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-shine:hover::after {
+  animation: shine-sweep 0.8s ease-out;
+}
+
+.btn-shine-auto::after {
+  animation: shine-sweep-loop 6s ease-in-out 2.4s infinite;
+}
+
+@keyframes shine-sweep {
+  from {
+    opacity: 1;
+    transform: translateX(0) skewX(-20deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(400%) skewX(-20deg);
+  }
+}
+
+/* sweep takes the first 15% of the 6s cycle, then rests */
+@keyframes shine-sweep-loop {
+  0% {
+    opacity: 1;
+    transform: translateX(0) skewX(-20deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(400%) skewX(-20deg);
+  }
+  15.01%,
+  100% {
+    opacity: 0;
+    transform: translateX(400%) skewX(-20deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine::after {
+    animation: none !important;
+  }
+}

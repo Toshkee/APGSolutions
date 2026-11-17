@@ -59,7 +59,8 @@ export function Hero() {
             className="display mt-[18px] text-[42px] leading-[0.98] text-white [text-wrap:wrap] lg:mt-[26px] lg:text-[76px] lg:tracking-[-0.5px]"
           >
             {hero.title}
-            <span className="text-amber">{hero.titleAccent}</span>
+            {/* marker highlight sweeps in behind the accent words once the headline has risen (globals.css .marker) */}
+            <span className="marker text-amber">{hero.titleAccent}</span>
           </motion.h1>
 
           <motion.p
@@ -71,7 +72,9 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={rise} className="mt-7 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-3.5 lg:mt-[38px]">
-            <Button href="#get-started">Find Drivers →</Button>
+            <Button href="#get-started" className="btn-shine-auto">
+              Find Drivers →
+            </Button>
             <Button href="#apply" variant="outline">
               I&apos;m a Driver — Apply
             </Button>

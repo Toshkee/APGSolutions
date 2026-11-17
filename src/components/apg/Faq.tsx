@@ -7,7 +7,8 @@ import { Reveal, easeOut } from "../Reveal";
 import { Button, SectionHeading } from "./ui";
 
 export function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
+  // all questions start closed
+  const [open, setOpen] = useState<number | null>(null);
   // The answer tucks up under its question (8px on phones, 14px from lg). The pull is animated with the
   // height, so nothing below jumps when an answer mounts or unmounts.
   const [pull, setPull] = useState(-8);

@@ -85,15 +85,16 @@ export const twoSides = {
 };
 
 export const benefits = {
+  // icon names map to the animated icons in components/apg/AnimatedIcon.tsx
   title: "Pay-per-driver, done right.",
   lead: "A recruiting partner that only wins when you do.",
   items: [
-    { title: "Performance-based", text: "No placement, no invoice. Our incentives are 100% aligned with yours.", icon: { src: "/apg/icon-pulse.svg", w: 26, h: 26 } },
-    { title: "Pre-screened drivers", text: "Every candidate is checked for CDL class, experience, MVR and equipment fit.", icon: { src: "/apg/icon-shield.svg", w: 26, h: 26 } },
-    { title: "Retention-based payments", text: "Fees are split across milestones, so you’re protected if a driver doesn’t stay.", icon: { src: "/apg/icon-repeat.svg", w: 26, h: 26.0333 } },
-    { title: "Fast turnaround", text: "First qualified candidates typically land in your inbox within 72 hours.", icon: { src: "/apg/icon-clock.svg", w: 26, h: 26 } },
-    { title: "No long contracts", text: "Scale up or pause anytime. No minimums, no lock-in, no surprises.", icon: { src: "/apg/icon-lock.svg", w: 26, h: 26 } },
-    { title: "Dedicated recruiter", text: "One point of contact who learns your fleet, lanes and culture.", icon: { src: "/apg/icon-users.svg", w: 26.0333, h: 26 } },
+    { title: "Performance-based", text: "No placement, no invoice. Our incentives are 100% aligned with yours.", icon: "pulse" },
+    { title: "Pre-screened drivers", text: "Every candidate is checked for CDL class, experience, MVR and equipment fit.", icon: "shield" },
+    { title: "Retention-based payments", text: "Fees are split across milestones, so you’re protected if a driver doesn’t stay.", icon: "repeat" },
+    { title: "Fast turnaround", text: "First qualified candidates typically land in your inbox within 72 hours.", icon: "clock" },
+    { title: "No long contracts", text: "Scale up or pause anytime. No minimums, no lock-in, no surprises.", icon: "lock" },
+    { title: "Dedicated recruiter", text: "One point of contact who learns your fleet, lanes and culture.", icon: "users" },
   ],
 };
 
@@ -108,13 +109,27 @@ export const howItWorks = {
   ],
 };
 
+// US coverage map section (between Benefits and Pricing)
+export const coverage = {
+  title: "Drivers for every lane, in all 48 states.",
+  lead: "Our recruiters work out of Nashville and find CDL-A drivers coast to coast, wherever your trucks run.",
+};
+
 export const pricing = {
   title: "One flat fee per driver placed.",
   lead: "No retainers. No monthly minimums. You only pay when a qualified driver starts working for you.",
-  compare: [
-    { yes: true, text: "APG: pay only after the driver starts" },
-    { yes: false, text: "Others: $3,000+/mo retainer, results not guaranteed" },
-  ],
+  // APG vs retainer recruiters. Every claim here is already made elsewhere on the page.
+  compare: {
+    them: "Retainer recruiters",
+    us: "APG",
+    rows: [
+      { label: "Upfront cost", them: "$3,000+/mo retainer", us: "$0" },
+      { label: "You pay", them: "Whether they deliver or not", us: "Only when a driver starts" },
+      { label: "Contract", them: "Long-term lock-in", us: "None, pause anytime" },
+      { label: "If a driver quits", them: "You already paid", us: "Covered by retention milestones" },
+      { label: "Candidates", them: "Stacks of resumes", us: "MVR, PSP & experience pre-screened" },
+    ],
+  },
   card: {
     pill: "Pay per hire",
     price: "Flat fee",

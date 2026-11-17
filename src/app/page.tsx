@@ -1,4 +1,5 @@
 import { Benefits } from "@/components/apg/Benefits";
+import { CoverageMap } from "@/components/apg/CoverageMap";
 import { Cta } from "@/components/apg/Cta";
 import { DriverTypes } from "@/components/apg/DriverTypes";
 import { Faq } from "@/components/apg/Faq";
@@ -10,7 +11,7 @@ import { Stats } from "@/components/apg/Stats";
 import { Team } from "@/components/apg/Team";
 import { TwoSides } from "@/components/apg/TwoSides";
 
-// Problem → who it's for → how it works → why us → price → people → questions → form
+// Problem → who it's for → how it works → why us → where (US map) → price → people → questions → form
 export default function Home() {
   return (
     <>
@@ -22,6 +23,7 @@ export default function Home() {
         <TwoSides />
         <HowItWorks />
         <Benefits />
+        <CoverageMap />
         <Pricing />
         <Team variant="preview" />
         <Faq />
