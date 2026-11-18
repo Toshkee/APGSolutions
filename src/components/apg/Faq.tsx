@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { faq } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { Reveal, easeOut } from "../Reveal";
 import { Button, SectionHeading } from "./ui";
 
-export function Faq() {
+export function Faq({ t: faq }: { t: Dictionary["faq"] }) {
   // all questions start closed
   const [open, setOpen] = useState<number | null>(null);
   // The answer tucks up under its question (8px on phones, 14px from lg). The pull is animated with the

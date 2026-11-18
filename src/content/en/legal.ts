@@ -1,7 +1,8 @@
 // DRAFT legal copy for the prototype, written from what the site actually collects (see src/app/actions.ts).
-// The client (ideally with a lawyer) must review both before launch.
+// The client (ideally with a lawyer) must review both before launch. content/es/legal.ts is the Spanish version.
 
-import { site } from "./apg";
+import { site } from "../site";
+import { hours } from "./apg";
 
 export type LegalSection = {
   heading: string;
@@ -14,19 +15,20 @@ export type LegalDoc = {
   metaTitle: string;
   metaDescription: string;
   title: string;
+  // Full line under the title, date included
   updated: string;
   intro: string[];
   sections: LegalSection[];
 };
 
-const UPDATED = "November 16, 2026";
+const UPDATED = "Last updated November 16, 2026";
 
 const contactSection: LegalSection = {
   heading: "Contact us",
   paragraphs: [
     `${site.legalName}, Nashville, Tennessee`,
     `Email: ${site.email}`,
-    `Phone: ${site.phone} (${site.hours})`,
+    `Phone: ${site.phone} (${hours})`,
   ],
 };
 

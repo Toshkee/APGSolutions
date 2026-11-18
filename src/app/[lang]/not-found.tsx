@@ -1,16 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { lang as rootLang } from "next/root-params";
 import { Button, Svg } from "@/components/apg/ui";
-import { notFound } from "@/content/apg";
-import poster from "../../public/media/nashville-hero-poster.jpg";
+import { getDictionary } from "@/content";
+import { defaultLocale, hasLocale, localePath } from "@/i18n";
+import poster from "../../../public/media/nashville-hero-poster.jpg";
 
-export const metadata: Metadata = {
-  title: notFound.metaTitle,
-};
+// not-found pages get no params, so the language comes from next/root-params
+async function currentLang() {
+  const lang = await rootLang();
+  return hasLocale(lang) ? lang : defaultLocale;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: getDictionary(await currentLang()).notFound.metaTitle };
+}
 
 // Shown for any URL that doesn't exist. Same Nashville header as the About page, tall enough that the
 // footer doesn't sit right under the message.
-export default function NotFound() {
+export default async function NotFound() {
+  const lang = await currentLang();
+  const { notFound } = getDictionary(lang);
+
   return (
     <main id="top">
       <section className="relative flex min-h-[calc(100svh-120px)] items-center overflow-hidden bg-navy pt-(--nav-h)">
@@ -30,8 +41,8 @@ export default function NotFound() {
             </h1>
             <p className="mt-4 text-base leading-[1.6] text-pretty text-on-dark lg:mt-5 lg:text-xl">{notFound.lead}</p>
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-3.5">
-              <Button href="/">{notFound.home}</Button>
-              <Button href="/#get-started" variant="outline">
+              <Button href={localePath(lang, "/")}>{notFound.home}</Button>
+              <Button href={localePath(lang, "/#get-started")} variant="outline">
                 {notFound.cta}
               </Button>
             </div>

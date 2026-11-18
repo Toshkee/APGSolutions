@@ -1,10 +1,12 @@
-import { cta, site } from "@/content/apg";
+import type { Dictionary } from "@/content";
+import { site } from "@/content/site";
+import type { Locale } from "@/i18n";
 import { Reveal } from "../Reveal";
 import { LeadForm } from "./LeadForm";
 import { CtaShader } from "./CtaShader";
 import { CheckItem } from "./ui";
 
-export function Cta() {
+export function Cta({ lang, t: cta }: { lang: Locale; t: Dictionary["cta"] }) {
   return (
     <section id="get-started" className="pt-4 pb-16 lg:pt-[30px] lg:pb-[110px]">
       {/* "#apply" links land here too and switch the form to the driver tab */}
@@ -27,15 +29,15 @@ export function Cta() {
                 ))}
               </ul>
               <a href={site.phoneHref} className="hidden text-[17px] font-bold text-[#d4e0ff] transition-colors hover:text-amber lg:block">
-                Prefer to talk? Call <span className="whitespace-nowrap">{site.phone}</span>
+                {cta.call} <span className="whitespace-nowrap">{site.phone}</span>
               </a>
             </div>
 
-            <LeadForm />
+            <LeadForm lang={lang} t={cta.form} />
 
             {/* py-3 with -my-3: 47px tall tap area without moving the text */}
             <a href={site.phoneHref} className="relative -my-3 py-3 text-center text-[15px] font-bold text-[#d4e0ff] lg:hidden">
-              Prefer to talk? Call <span className="whitespace-nowrap">{site.phone}</span>
+              {cta.call} <span className="whitespace-nowrap">{site.phone}</span>
             </a>
           </div>
         </Reveal>

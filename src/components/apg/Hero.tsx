@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import { hero } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { easeOut } from "../Reveal";
 import { Button, CheckItem, Svg } from "./ui";
 
@@ -11,7 +11,7 @@ const rise: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easeOut } },
 };
 
-export function Hero() {
+export function Hero({ t: hero }: { t: Dictionary["hero"] }) {
   // Desktop: at least one full screen tall, so nothing white peeks in under it on first load
   return (
     <section className="relative overflow-hidden bg-deep lg:flex lg:min-h-[max(calc(780px+var(--nav-h)),100svh)] lg:items-center lg:bg-navy">
@@ -73,10 +73,10 @@ export function Hero() {
 
           <motion.div variants={rise} className="mt-7 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-3.5 lg:mt-[38px]">
             <Button href="#get-started" className="btn-shine-auto">
-              Find Drivers →
+              {hero.ctaCarrier}
             </Button>
             <Button href="#apply" variant="outline">
-              I&apos;m a Driver — Apply
+              {hero.ctaDriver}
             </Button>
           </motion.div>
 

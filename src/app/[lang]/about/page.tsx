@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Reveal } from "@/components/Reveal";
 import { Team } from "@/components/apg/Team";
 import { SectionHeading, Svg } from "@/components/apg/ui";
-import { about } from "@/content/apg";
-import poster from "../../../public/media/nashville-hero-poster.jpg";
+import { getDictionary } from "@/content";
+import { alternates, hasLocale } from "@/i18n";
+import poster from "../../../../public/media/nashville-hero-poster.jpg";
 // Placeholder photo (Unsplash, free license): semi-truck on the highway at dusk
-import highwayDusk from "../../../public/photos/highway-dusk.jpg";
+import highwayDusk from "../../../../public/photos/highway-dusk.jpg";
 
-export const metadata: Metadata = {
-  title: about.metaTitle,
-  description: about.metaDescription,
-};
+export async function generateMetadata({ params }: PageProps<"/[lang]/about">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  const { about } = getDictionary(lang);
+  return { title: about.metaTitle, description: about.metaDescription, alternates: alternates(lang, "/about") };
+}
 
-export default function AboutPage() {
+export default async function AboutPage({ params }: PageProps<"/[lang]/about">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const { about, team } = getDictionary(lang);
+
   return (
     <main id="top">
       {/* Page header: same Nashville still as the home hero, darker */}
@@ -53,7 +61,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] shadow-[0_24px_60px_-30px_rgba(11,27,63,0.55)] lg:rounded-[22px]">
               <Image
                 src={highwayDusk}
-                alt="Semi-truck driving on a highway at dusk"
+                alt={about.photoAlt}
                 fill
                 sizes="(width >= 64rem) 600px, 100vw"
                 placeholder="blur"
@@ -64,7 +72,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Team variant="full" />
+      <Team variant="full" lang={lang} t={team} />
     </main>
   );
 }

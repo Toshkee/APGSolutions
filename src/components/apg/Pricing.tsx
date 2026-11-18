@@ -1,8 +1,10 @@
-import { pricing } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { Reveal } from "../Reveal";
 import { Button, CheckItem, SectionHeading, Svg } from "./ui";
 
-export function Pricing() {
+type PricingCopy = Dictionary["pricing"];
+
+export function Pricing({ t: pricing }: { t: PricingCopy }) {
   const { card } = pricing;
   return (
     <section id="pricing" className="bg-surface py-16 lg:py-[110px]">
@@ -14,7 +16,7 @@ export function Pricing() {
             titleClassName="lg:max-w-[620px]"
             leadClassName="lg:max-w-[600px]"
           />
-          <Compare />
+          <Compare compare={pricing.compare} />
         </Reveal>
 
         <Reveal delay={0.12} className="w-full lg:w-[520px] lg:shrink-0">
@@ -22,7 +24,7 @@ export function Pricing() {
             <p className="rounded-full bg-pill px-3.5 py-[7px] text-[13px] font-bold text-blue">
               {card.pill}
             </p>
-            <p className="mt-4 flex items-baseline gap-2.5 lg:mt-5">
+            <p className="mt-4 flex flex-wrap items-baseline gap-x-2.5 lg:mt-5">
               <span className="text-[44px] leading-none font-extrabold tracking-[-0.03em] lg:text-[60px]">{card.price}</span>
               <span className="text-lg font-semibold text-muted lg:text-xl">{card.unit}</span>
             </p>
@@ -44,31 +46,31 @@ export function Pricing() {
   );
 }
 
-// APG vs retainer recruiters. Phones: each row is a label over two cells. Desktop: a three-column table.
+// APG vs retainer recruiters. Up to 1279px: each row is a label over two cells. From 1280px: a three-column table
+// (at 1024–1279px the column next to the price card is too narrow for three columns, in Spanish most of all).
 // The APG column is tinted blue the whole way down, so it reads as the one to pick.
-function Compare() {
-  const { compare } = pricing;
+function Compare({ compare }: { compare: PricingCopy["compare"] }) {
   return (
     <div className="mt-8 overflow-hidden rounded-[16px] border border-line bg-white lg:mt-[34px]">
-      <div className="grid grid-cols-2 text-[13px] font-bold tracking-[0.5px] uppercase lg:grid-cols-[0.85fr_1fr_1fr]">
-        <span className="hidden lg:block" />
-        <span className="px-4 py-3.5 text-subtle lg:px-5">{compare.them}</span>
-        <span className="bg-pill px-4 py-3.5 text-blue lg:px-5">{compare.us}</span>
+      <div className="grid grid-cols-2 text-[13px] font-bold tracking-[0.5px] uppercase xl:grid-cols-[0.85fr_1fr_1fr]">
+        <span className="hidden xl:block" />
+        <span className="px-4 py-3.5 text-subtle xl:px-5">{compare.them}</span>
+        <span className="bg-pill px-4 py-3.5 text-blue xl:px-5">{compare.us}</span>
       </div>
       <ul>
         {compare.rows.map((r) => (
-          <li key={r.label} className="grid grid-cols-2 border-t border-line text-[14.5px] leading-[1.45] lg:grid-cols-[0.85fr_1fr_1fr] lg:text-[15px]">
-            <span className="px-4 pt-3.5 text-[12.5px] font-bold tracking-[0.4px] text-label uppercase lg:py-4 lg:pl-5 lg:text-[14px] lg:tracking-normal lg:normal-case">
+          <li key={r.label} className="grid grid-cols-2 border-t border-line text-[14.5px] leading-[1.45] xl:grid-cols-[0.85fr_1fr_1fr] xl:text-[15px]">
+            <span className="px-4 pt-3.5 text-[12.5px] font-bold tracking-[0.4px] text-label uppercase xl:py-4 xl:pl-5 xl:text-[14px] xl:tracking-normal xl:normal-case">
               {r.label}
             </span>
             {/* phones: the label sits in the left half and this keeps the APG tint running through its row,
                 so the blue column has no white gaps */}
-            <span aria-hidden="true" className="bg-pill lg:hidden" />
-            <span className="flex items-start gap-2 px-4 pt-1.5 pb-3.5 text-muted lg:py-4 lg:pl-5">
+            <span aria-hidden="true" className="bg-pill xl:hidden" />
+            <span className="flex items-start gap-2 px-4 pt-1.5 pb-3.5 text-muted xl:py-4 xl:pl-5">
               <Svg src="/apg/compare-no.svg" w={18} h={18} className="mt-px" />
               {r.them}
             </span>
-            <span className="flex items-start gap-2 bg-pill px-4 pt-1.5 pb-3.5 font-semibold text-navy lg:py-4 lg:pl-5">
+            <span className="flex items-start gap-2 bg-pill px-4 pt-1.5 pb-3.5 font-semibold text-navy xl:py-4 xl:pl-5">
               <Svg src="/apg/compare-yes.svg" w={18} h={18} className="mt-px" />
               {r.us}
             </span>

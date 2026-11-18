@@ -1,12 +1,20 @@
-import { problem } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { ParallaxImage } from "../ParallaxImage";
 import { Reveal } from "../Reveal";
 import { SectionHeading, Svg } from "./ui";
 import idleTrailers from "../../../public/photos/idle-trailers.jpg";
 
+// One icon per pain, in the same order as problem.pains
+const painIcons = [
+  { src: "/apg/pain-idle-trucks.svg", w: 22.1833, h: 22 },
+  { src: "/apg/pain-unqualified.svg", w: 22, h: 22 },
+  { src: "/apg/pain-retainers.svg", w: 22, h: 22.3667 },
+  { src: "/apg/pain-turnover.svg", w: 22, h: 22 },
+];
+
 // Full-width dark band over a photo of parked trailers: the one "problem" moment on the page,
 // so it looks different from the light text-and-list sections around it
-export function Problem() {
+export function Problem({ t: problem }: { t: Dictionary["problem"] }) {
   return (
     <section className="relative isolate overflow-hidden bg-deep py-16 lg:py-[120px]">
       {/* Placeholder photo (Unsplash, free license): aerial view of parked trailers */}
@@ -38,7 +46,7 @@ export function Problem() {
                 <div className="group flex h-full gap-4 rounded-[18px] border border-white/10 bg-[rgba(40,51,78,0.7)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#e5484d]/40 hover:bg-[rgba(48,59,86,0.7)] sm:block lg:p-7">
                   {/* icon beside the text on phones, above it from sm up */}
                   <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e5484d]/15 ring-1 ring-[#e5484d]/25 transition-transform duration-300 group-hover:scale-110 sm:size-11">
-                    <Svg src={p.icon.src} w={p.icon.w} h={p.icon.h} className="scale-90" />
+                    <Svg src={painIcons[i].src} w={painIcons[i].w} h={painIcons[i].h} className="scale-90" />
                   </span>
                   <div className="min-w-0">
                     <h3 className="text-[17px] font-bold text-white sm:mt-4 lg:mt-5 lg:text-[19px]">{p.title}</h3>

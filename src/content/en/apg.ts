@@ -1,17 +1,17 @@
-// All landing page copy, taken from the APG Solutions Figma design.
-// The phone number (Nashville 615 area code) and email are placeholders.
+// All English landing page copy, taken from the APG Solutions Figma design.
+// content/es/apg.ts has the same keys in Spanish: change both when the copy changes.
+// Phone number and email are in content/site.ts. Links are written as English paths; the components add "/es".
 
-export const site = {
-  // Live address, used for the share preview, robots.txt and sitemap. Change it when the real domain is connected.
-  url: "https://apg-solutions.vercel.app",
-  name: "APG Solutions",
-  legalName: "APG Solutions Inc.",
-  phone: "(615) 555-0142",
-  phoneHref: "tel:+16155550142",
-  email: "hello@apgsolutions.com",
-  hours: "Mon–Fri, 8am–6pm CT",
-  tagline: "Connecting talent. Driving success.",
+export const meta = {
+  title: "APG Solutions | Pay-Per-Driver CDL Recruiting",
+  description:
+    "Only pay when we put a driver in your seat. Pre-screened, road-ready CDL drivers for carriers nationwide. No retainers, no monthly fees.",
+  // Share preview image (1200×630) in public/share. The Spanish one is made by scripts/make-share-image.py
+  shareImage: "/share/og-en.jpg",
+  shareImageAlt: "APG Solutions: only pay when we put a driver in your seat. Pay-per-driver CDL recruiting from Nashville, TN.",
 };
+
+export const hours: string = "Mon–Fri, 8am–6pm CT";
 
 // Home sections are linked as "/#id" so they also work from other pages
 export const navLinks = [
@@ -21,7 +21,20 @@ export const navLinks = [
   { label: "Pricing", href: "/#pricing" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/#faq" },
-] as const;
+];
+
+export const nav = {
+  homeLabel: "APG Solutions home",
+  mainLabel: "Main",
+  mobileLabel: "Mobile",
+  openMenu: "Open menu",
+  closeMenu: "Close menu",
+  getStarted: "Get Started",
+  // Switch to the other language, written in that language so people who need it can read it
+  switchLabel: "Español",
+  switchShort: "ES",
+  switchAria: "Ver el sitio en español",
+};
 
 export const hero = {
   badge: "Nashville, TN · CDL-A recruiting in all 48 states",
@@ -31,39 +44,29 @@ export const hero = {
   lead: "APG Solutions connects carriers with pre-screened, road-ready CDL drivers. No retainers, no monthly fees — just qualified drivers who show up and stay.",
   leadShort: "APG Solutions connects carriers with pre-screened, road-ready CDL drivers. No retainers, no monthly fees.",
   trust: ["$0 upfront", "No long contracts", "Retention-based payments"],
+  ctaCarrier: "Find Drivers →",
+  ctaDriver: "I'm a Driver — Apply",
 };
 
-export const stats = [
-  { value: "2,500+", label: "CDL drivers placed", labelShort: "Drivers placed" },
-  { value: "48", label: "States covered nationwide", labelShort: "States covered" },
-  { value: "72 hrs", label: "Avg. time to first candidate", labelShort: "To first candidate" },
-  { value: "$0", label: "Upfront or monthly retainer", labelShort: "Upfront retainer" },
-];
+export const stats = {
+  label: "APG Solutions in numbers",
+  items: [
+    { value: "2,500+", label: "CDL drivers placed", labelShort: "Drivers placed" },
+    { value: "48", label: "States covered nationwide", labelShort: "States covered" },
+    { value: "72 hrs", label: "Avg. time to first candidate", labelShort: "To first candidate" },
+    { value: "$0", label: "Upfront or monthly retainer", labelShort: "Upfront retainer" },
+  ],
+};
 
+// Pain icons are set in components/apg/Problem.tsx, in this order
 export const problem = {
   title: "Empty seats cost you every single day.",
   lead: "Every parked truck is lost revenue. Traditional recruiters charge you whether they deliver or not — we don’t.",
   pains: [
-    {
-      title: "Idle trucks",
-      text: "Unseated trucks burn hundreds of dollars a day in lost loads and fixed costs.",
-      icon: { src: "/apg/pain-idle-trucks.svg", w: 22.1833, h: 22 },
-    },
-    {
-      title: "Unqualified applicants",
-      text: "Stacks of resumes that don’t meet your experience, MVR or equipment needs.",
-      icon: { src: "/apg/pain-unqualified.svg", w: 22, h: 22 },
-    },
-    {
-      title: "Expensive retainers",
-      text: "Monthly fees that keep billing long after the results stop coming in.",
-      icon: { src: "/apg/pain-retainers.svg", w: 22, h: 22.3667 },
-    },
-    {
-      title: "Constant turnover",
-      text: "Drivers who quit in week two — and you’ve already paid for the hire.",
-      icon: { src: "/apg/pain-turnover.svg", w: 22, h: 22 },
-    },
+    { title: "Idle trucks", text: "Unseated trucks burn hundreds of dollars a day in lost loads and fixed costs." },
+    { title: "Unqualified applicants", text: "Stacks of resumes that don’t meet your experience, MVR or equipment needs." },
+    { title: "Expensive retainers", text: "Monthly fees that keep billing long after the results stop coming in." },
+    { title: "Constant turnover", text: "Drivers who quit in week two — and you’ve already paid for the hire." },
   ],
 };
 
@@ -75,26 +78,28 @@ export const twoSides = {
     text: "Tap into a nationwide pool of verified CDL-A drivers, pre-screened to your exact hiring criteria.",
     items: ["MVR, PSP & experience pre-screened", "You interview and make the final call", "Pay only after the driver starts"],
     cta: "Find Drivers →",
+    photoAlt: "Black semi-truck on a highway",
   },
   drivers: {
     title: "Find the road that fits you.",
     text: "One short application. We bring you jobs that match your lanes, home time and pay goals — 100% free.",
     items: ["Never pay a cent to apply", "Clear pay, route & equipment upfront", "Real recruiters, not job-board spam"],
     cta: "Apply to Drive →",
+    photoAlt: "Truck driver standing next to his red semi-truck",
   },
 };
 
+// Animated icons are set in components/apg/Benefits.tsx, in this order
 export const benefits = {
-  // icon names map to the animated icons in components/apg/AnimatedIcon.tsx
   title: "Pay-per-driver, done right.",
   lead: "A recruiting partner that only wins when you do.",
   items: [
-    { title: "Performance-based", text: "No placement, no invoice. Our incentives are 100% aligned with yours.", icon: "pulse" },
-    { title: "Pre-screened drivers", text: "Every candidate is checked for CDL class, experience, MVR and equipment fit.", icon: "shield" },
-    { title: "Retention-based payments", text: "Fees are split across milestones, so you’re protected if a driver doesn’t stay.", icon: "repeat" },
-    { title: "Fast turnaround", text: "First qualified candidates typically land in your inbox within 72 hours.", icon: "clock" },
-    { title: "No long contracts", text: "Scale up or pause anytime. No minimums, no lock-in, no surprises.", icon: "lock" },
-    { title: "Dedicated recruiter", text: "One point of contact who learns your fleet, lanes and culture.", icon: "users" },
+    { title: "Performance-based", text: "No placement, no invoice. Our incentives are 100% aligned with yours." },
+    { title: "Pre-screened drivers", text: "Every candidate is checked for CDL class, experience, MVR and equipment fit." },
+    { title: "Retention-based payments", text: "Fees are split across milestones, so you’re protected if a driver doesn’t stay." },
+    { title: "Fast turnaround", text: "First qualified candidates typically land in your inbox within 72 hours." },
+    { title: "No long contracts", text: "Scale up or pause anytime. No minimums, no lock-in, no surprises." },
+    { title: "Dedicated recruiter", text: "One point of contact who learns your fleet, lanes and culture." },
   ],
 };
 
@@ -186,18 +191,70 @@ export const faq = {
   ],
 };
 
+// Select options keep English values so the lead email reads the same whatever language the form was filled in
 export const cta = {
   title: "Ready to fill your empty seats?",
   lead: "Start your free carrier review today — no commitment required.",
   leadShort: "Free carrier review — no commitment.",
   checks: ["Free carrier review — no commitment", "Candidates in your inbox within 72 hours", "Pay only when a driver starts"],
+  call: "Prefer to talk? Call",
   form: {
     title: "Get matched in 48 hours",
     lead: "Tell us who you are — it takes under 2 minutes.",
     // Driver details do go to matching carriers, so the note only promises "never sold" (see /privacy)
     privacy: "Your information is never sold.",
     privacyLink: "Privacy Policy",
+    tabsLabel: "I am",
+    tabCarrier: "I'm hiring drivers",
+    tabDriver: "I'm a driver",
+    done: "You’re all set.",
+    sending: "Sending…",
+    // the no-break space keeps the arrow on the same line as the last word
+    submitCarrier: "Check My Carrier's Fit →",
+    submitDriver: "Apply to Drive →",
+    fields: {
+      company: { label: "Company name", placeholder: "e.g. Midwest Freight LLC" },
+      usdot: { label: "USDOT / MC #", placeholder: "1234567" },
+      driversNeeded: { label: "Drivers needed", placeholder: "1 – 5" },
+      workEmail: { label: "Work email", placeholder: "you@company.com" },
+      name: { label: "Full name", placeholder: "e.g. John Smith" },
+      phone: { label: "Phone", placeholder: "(555) 123-4567" },
+      experience: {
+        label: "CDL-A experience",
+        placeholder: "Select",
+        options: [
+          { value: "Less than 1 year", label: "Less than 1 year" },
+          { value: "1 – 2 years", label: "1 – 2 years" },
+          { value: "3 – 5 years", label: "3 – 5 years" },
+          { value: "5+ years", label: "5+ years" },
+        ],
+      },
+      email: { label: "Email", placeholder: "you@email.com" },
+    },
   },
+};
+
+// Replies from the form's server action (src/app/actions.ts)
+export const formMessages = {
+  required: {
+    company: "Please enter your company name.",
+    email: "Please enter your email.",
+    workEmail: "Please enter your work email.",
+    name: "Please enter your full name.",
+    phone: "Please enter your phone.",
+  },
+  invalidEmail: "Please enter a valid email address.",
+  checkFields: "Please check the highlighted fields.",
+  unavailable: "Sorry, the form is unavailable right now. Please call us.",
+  failed: "Sorry, something went wrong. Please try again or call us.",
+  thanks: "Thanks! We’ll be in touch shortly.",
+  successCarrier: "Thanks! A recruiter will review your fit and reach out within one business day.",
+  successDriver: "Thanks for applying! A recruiter will call you about jobs that match.",
+};
+
+export const mobileCta = {
+  findDrivers: "Find Drivers →",
+  call: "Call",
 };
 
 export const footer = {
@@ -233,6 +290,13 @@ export const footer = {
       ],
     },
   ],
+  homeLabel: "APG Solutions home",
+  contact: "Contact",
+  rights: "All rights reserved.",
+  privacyShort: "Privacy",
+  termsShort: "Terms",
+  privacy: "Privacy Policy",
+  terms: "Terms of Service",
 };
 
 // PLACEHOLDER team: names, roles and bios are made up for the prototype. Swap in the real people
@@ -275,4 +339,5 @@ export const about = {
       "Our team works out of Nashville and talks with drivers every day. We learn your lanes, equipment and culture, then send you people who fit, not a stack of resumes.",
     ],
   },
+  photoAlt: "Semi-truck driving on a highway at dusk",
 };

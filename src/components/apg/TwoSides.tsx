@@ -1,12 +1,12 @@
 import Image, { type StaticImageData } from "next/image";
-import { twoSides } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { Reveal } from "../Reveal";
 import { Button, CheckItem, SectionHeading } from "./ui";
 // Placeholder photos (Unsplash, free license) until the client sends their own
 import carrierTruck from "../../../public/photos/carrier-truck.jpg";
 import driverPhoto from "../../../public/photos/driver.jpg";
 
-type Side = typeof twoSides.carriers;
+type Side = Dictionary["twoSides"]["carriers"];
 
 type CardProps = {
   side: Side;
@@ -14,12 +14,11 @@ type CardProps = {
   id: string;
   href: string;
   photo: StaticImageData;
-  alt: string;
   // Where to crop the photo inside the 16:9 frame
   focus: string;
 };
 
-function SideCard({ side, dark, id, href, photo, alt, focus }: CardProps) {
+function SideCard({ side, dark, id, href, photo, focus }: CardProps) {
   return (
     <article
       id={id}
@@ -33,7 +32,7 @@ function SideCard({ side, dark, id, href, photo, alt, focus }: CardProps) {
       <div className="relative aspect-[16/9] overflow-hidden lg:aspect-[2/1]">
         <Image
           src={photo}
-          alt={alt}
+          alt={side.photoAlt}
           fill
           sizes="(width >= 64rem) 600px, 100vw"
           placeholder="blur"
@@ -61,7 +60,8 @@ function SideCard({ side, dark, id, href, photo, alt, focus }: CardProps) {
           ))}
         </ul>
         <div className="mt-auto w-full pt-6 lg:pt-[34px]">
-          <Button href={href} variant={dark ? "primary" : "dark"} className="w-full sm:w-auto">
+          {/* Less side padding under 360px so the longer Spanish labels fit the card */}
+          <Button href={href} variant={dark ? "primary" : "dark"} className="w-full max-[359px]:px-5 sm:w-auto">
             {side.cta}
           </Button>
         </div>
@@ -70,7 +70,7 @@ function SideCard({ side, dark, id, href, photo, alt, focus }: CardProps) {
   );
 }
 
-export function TwoSides() {
+export function TwoSides({ t: twoSides }: { t: Dictionary["twoSides"] }) {
   return (
     <section id="solutions" className="bg-surface py-16 lg:py-[110px]">
       <div className="container-apg">
@@ -90,7 +90,6 @@ export function TwoSides() {
               id="carriers"
               href="#get-started"
               photo={carrierTruck}
-              alt="Black semi-truck on a highway"
               focus="50% 60%"
             />
           </Reveal>
@@ -101,7 +100,6 @@ export function TwoSides() {
               id="drivers"
               href="#apply"
               photo={driverPhoto}
-              alt="Truck driver standing next to his red semi-truck"
               focus="50% 64%"
             />
           </Reveal>

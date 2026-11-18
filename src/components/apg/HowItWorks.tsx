@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { howItWorks } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { Reveal } from "../Reveal";
 import { AnimatedIcon, useIconPlay, type IconName } from "./AnimatedIcon";
 import { SectionHeading } from "./ui";
@@ -13,7 +13,7 @@ const stepIcons: IconName[] = ["clipboard", "search", "chat", "dollar"];
 const DRAW = 1.4;
 
 // A real sequence, so it reads as a timeline: horizontal on desktop, vertical on phones
-export function HowItWorks() {
+export function HowItWorks({ t: howItWorks }: { t: Dictionary["howItWorks"] }) {
   return (
     <section
       id="how-it-works"
@@ -47,7 +47,7 @@ export function HowItWorks() {
             className="absolute top-6 right-0 left-0 hidden h-px origin-left bg-[linear-gradient(90deg,#f5a524,rgba(245,165,36,0.25))] lg:block"
           />
           {howItWorks.steps.map((step, i) => (
-            <Step key={step.title} index={i} {...step} />
+            <Step key={step.title} index={i} count={howItWorks.steps.length} {...step} />
           ))}
         </ol>
       </div>
@@ -55,9 +55,9 @@ export function HowItWorks() {
   );
 }
 
-function Step({ title, text, index }: { title: string; text: string; index: number }) {
+function Step({ title, text, index, count }: { title: string; text: string; index: number; count: number }) {
   // play right after this step's icon has popped in on the timeline
-  const { ref, controls, play } = useIconPlay((DRAW / howItWorks.steps.length) * index + 0.45, "0px 0px -120px 0px");
+  const { ref, controls, play } = useIconPlay((DRAW / count) * index + 0.45, "0px 0px -120px 0px");
   return (
     <li ref={ref} onMouseEnter={play} className="group relative pl-[68px] lg:pt-[76px] lg:pl-0">
       {/* each icon pops in as the line reaches it. The pop-in (outer) and the hover styles (inner) are on
@@ -67,14 +67,14 @@ function Step({ title, text, index }: { title: string; text: string; index: numb
         initial={{ scale: 0.4, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true, margin: "0px 0px -120px 0px" }}
-        transition={{ type: "spring", stiffness: 260, damping: 18, delay: (DRAW / howItWorks.steps.length) * index }}
+        transition={{ type: "spring", stiffness: 260, damping: 18, delay: (DRAW / count) * index }}
         className="absolute top-0 left-0 z-10 size-12"
       >
         <span className="grid size-full place-items-center rounded-full border border-amber/45 bg-[#0b2463] text-amber shadow-[0_0_0_6px_rgba(245,165,36,0.1)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-amber group-hover:bg-amber group-hover:text-navy group-hover:shadow-[0_0_0_6px_rgba(245,165,36,0.22)]">
           <AnimatedIcon name={stepIcons[index]} size={22} controls={controls} />
         </span>
       </motion.span>
-      <Reveal delay={(DRAW / howItWorks.steps.length) * index + 0.1}>
+      <Reveal delay={(DRAW / count) * index + 0.1}>
         <h3 className="pt-2.5 text-[19px] leading-[1.3] font-bold text-white lg:pt-0 lg:text-[21px]">{title}</h3>
         <p className="mt-2 text-[15.5px] leading-[1.6] text-on-dark-muted lg:max-w-[260px]">{text}</p>
       </Reveal>

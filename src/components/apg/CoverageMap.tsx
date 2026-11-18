@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { coverage } from "@/content/apg";
+import type { Dictionary } from "@/content";
 import { usMap } from "@/content/us-map";
 import { Reveal } from "../Reveal";
 import { SectionHeading } from "./ui";
@@ -23,7 +23,7 @@ function route(to: { x: number; y: number }) {
   return `M${hub.x} ${hub.y} Q${mx} ${my - lift} ${to.x} ${to.y}`;
 }
 
-export function CoverageMap() {
+export function CoverageMap({ t: coverage }: { t: Dictionary["coverage"] }) {
   return (
     <section className="overflow-hidden bg-[linear-gradient(160deg,#061232_0%,#0b2463_80%)] py-16 lg:py-[110px]">
       <div className="container-apg">

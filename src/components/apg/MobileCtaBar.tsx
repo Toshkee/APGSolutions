@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { site } from "@/content/apg";
+import type { Dictionary } from "@/content";
+import { site } from "@/content/site";
+import { localePath, type Locale } from "@/i18n";
 import { Button, MaskIcon } from "./ui";
 
 // Phones only: keeps "Find Drivers" and a call button in reach after the hero,
 // and gets out of the way once the final CTA form (home) or the footer (other pages) is on screen
-export function MobileCtaBar() {
+export function MobileCtaBar({ lang, t }: { lang: Locale; t: Dictionary["mobileCta"] }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -32,12 +34,13 @@ export function MobileCtaBar() {
       }`}
     >
       <div className="flex gap-3">
-        <Button href="/#get-started" className="flex-1">
-          Find Drivers →
+        {/* Less side padding under 360px so "Buscar conductores →" fits next to the call button */}
+        <Button href={localePath(lang, "/#get-started")} className="flex-1 max-[359px]:px-5">
+          {t.findDrivers}
         </Button>
         <a
           href={site.phoneHref}
-          aria-label={`Call ${site.phone}`}
+          aria-label={`${t.call} ${site.phone}`}
           className="grid size-[52px] shrink-0 place-items-center rounded-[10px] border-[1.5px] border-line-input text-blue transition-colors hover:border-blue/50 active:bg-pill"
         >
           <MaskIcon src="/apg/icon-phone.svg" size={20} />

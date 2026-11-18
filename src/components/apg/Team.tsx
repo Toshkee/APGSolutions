@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { team } from "@/content/apg";
+import type { Dictionary } from "@/content";
+import { localePath, type Locale } from "@/i18n";
 import { Reveal } from "../Reveal";
 import { SectionHeading } from "./ui";
 
-type Member = (typeof team.members)[number];
+type Member = Dictionary["team"]["members"][number];
 
 const initials = (name: string) =>
   name
@@ -50,7 +51,7 @@ function MemberCard({ m, withBio }: { m: Member; withBio: boolean }) {
 }
 
 // "preview" = short version on the home page with a link to About; "full" = About page, with bios
-export function Team({ variant }: { variant: "preview" | "full" }) {
+export function Team({ variant, lang, t: team }: { variant: "preview" | "full"; lang: Locale; t: Dictionary["team"] }) {
   const full = variant === "full";
   return (
     <section id={full ? "team" : undefined} className={`${full ? "bg-surface py-16 lg:py-[110px]" : "pt-16 pb-4 lg:pt-[110px] lg:pb-6"}`}>
@@ -58,7 +59,7 @@ export function Team({ variant }: { variant: "preview" | "full" }) {
         <Reveal className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading title={team.title} lead={team.lead} />
           {!full && (
-            <Link href="/about#team" className="hidden shrink-0 text-base font-bold text-blue transition-colors hover:text-blue-hover lg:block">
+            <Link href={localePath(lang, "/about#team")} className="hidden shrink-0 text-base font-bold text-blue transition-colors hover:text-blue-hover lg:block">
               {team.previewCta}
             </Link>
           )}
@@ -74,7 +75,7 @@ export function Team({ variant }: { variant: "preview" | "full" }) {
         </ul>
         {/* phones: py + smaller margins give a 44px tall tap area while the text stays where it was */}
         {!full && (
-          <Link href="/about#team" className="mt-3.5 -mb-2.5 inline-block py-2.5 text-base font-bold text-blue lg:hidden">
+          <Link href={localePath(lang, "/about#team")} className="mt-3.5 -mb-2.5 inline-block py-2.5 text-base font-bold text-blue lg:hidden">
             {team.previewCta}
           </Link>
         )}

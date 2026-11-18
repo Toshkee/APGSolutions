@@ -1,4 +1,4 @@
-import type { LegalDoc } from "@/content/legal";
+import type { LegalDoc } from "@/content/en/legal";
 
 // Shared layout for the Privacy Policy and Terms of Service pages: short navy header, then a narrow text column
 export function LegalPage({ doc }: { doc: LegalDoc }) {
@@ -7,7 +7,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
       <section className="bg-navy pt-(--nav-h)">
         <div className="container-apg py-12 lg:py-[72px]">
           <h1 className="text-[36px] leading-[1.1] font-bold tracking-[-0.025em] text-white lg:text-[52px]">{doc.title}</h1>
-          <p className="mt-3 text-[15px] text-on-dark lg:mt-4 lg:text-base">Last updated {doc.updated}</p>
+          <p className="mt-3 text-[15px] text-on-dark lg:mt-4 lg:text-base">{doc.updated}</p>
         </div>
       </section>
 

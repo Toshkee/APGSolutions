@@ -4,10 +4,14 @@ import { useActionState, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { submitLead, type LeadState, type LeadType } from "@/app/actions";
-import { cta } from "@/content/apg";
+import type { Dictionary } from "@/content";
+import { localePath, type Locale } from "@/i18n";
 import { easeOut } from "../Reveal";
 
 const initial: LeadState = { status: "idle", message: "" };
+
+// Same in every language
+const driversNeededOptions = ["1 – 5", "6 – 10", "11 – 25", "26+"].map((v) => ({ value: v, label: v }));
 
 const inputClass =
   "h-12 w-full rounded-[10px] border-[1.5px] border-line-input bg-white px-3.5 text-[15px] text-navy placeholder:text-placeholder transition-colors focus:border-blue focus:outline-none focus:shadow-[0_0_0_3px_rgba(21,87,230,0.15)] aria-invalid:border-[#d92d20]";
@@ -18,7 +22,7 @@ type FieldProps = {
   placeholder?: string;
   type?: string;
   autoComplete?: string;
-  options?: string[];
+  options?: { value: string; label: string }[];
   state: LeadState;
 };
 
@@ -43,8 +47,8 @@ function Field({ name, label, placeholder, type = "text", autoComplete, options,
               {placeholder}
             </option>
             {options.map((o) => (
-              <option key={o} value={o} className="text-navy">
-                {o}
+              <option key={o.value} value={o.value} className="text-navy">
+                {o.label}
               </option>
             ))}
           </select>
@@ -80,7 +84,8 @@ function Field({ name, label, placeholder, type = "text", autoComplete, options,
   );
 }
 
-export function LeadForm() {
+export function LeadForm({ lang, t }: { lang: Locale; t: Dictionary["cta"]["form"] }) {
+  const f = t.fields;
   const [type, setType] = useState<LeadType>("carrier");
   const [state, formAction, pending] = useActionState(submitLead, initial);
 
@@ -99,8 +104,8 @@ export function LeadForm() {
 
   return (
     <div className="relative flex w-full flex-col rounded-[18px] bg-white p-4 min-[360px]:p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9 lg:w-[516px] lg:shrink-0">
-      <h3 className="text-[20px] leading-tight font-bold tracking-[-0.02em] text-navy sm:text-[24px]">{cta.form.title}</h3>
-      <p className="mt-1.5 text-[15px] text-muted">{cta.form.lead}</p>
+      <h3 className="text-[20px] leading-tight font-bold tracking-[-0.02em] text-navy sm:text-[24px]">{t.title}</h3>
+      <p className="mt-1.5 text-[15px] text-muted">{t.lead}</p>
 
       <AnimatePresence mode="wait" initial={false}>
         {done ? (
@@ -117,7 +122,7 @@ export function LeadForm() {
                 <path d="M16.6667 5L7.5 14.1667L3.33333 10" stroke="#1557E6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-            <p className="text-lg font-bold text-navy">You’re all set.</p>
+            <p className="text-lg font-bold text-navy">{t.done}</p>
             <p className="text-[15px] leading-[1.6] text-muted">{state.message}</p>
           </motion.div>
         ) : (
@@ -130,11 +135,11 @@ export function LeadForm() {
             exit={{ opacity: 0 }}
             className="mt-6 flex flex-col"
           >
-            <div role="tablist" aria-label="I am" className="flex rounded-[10px] bg-tab p-1">
+            <div role="tablist" aria-label={t.tabsLabel} className="flex rounded-[10px] bg-tab p-1">
               {(
                 [
-                  ["carrier", "I'm hiring drivers"],
-                  ["driver", "I'm a driver"],
+                  ["carrier", t.tabCarrier],
+                  ["driver", t.tabDriver],
                 ] as const
               ).map(([value, label]) => {
                 const active = type === value;
@@ -164,31 +169,27 @@ export function LeadForm() {
               })}
             </div>
             <input type="hidden" name="type" value={type} />
+            {/* replies in this language, and the lead email says which language the form was filled in */}
+            <input type="hidden" name="lang" value={lang} />
 
             <div className="mt-5 flex flex-col gap-3.5">
               {type === "carrier" ? (
                 <>
-                  <Field name="company" label="Company name" placeholder="e.g. Midwest Freight LLC" autoComplete="organization" state={state} />
+                  <Field name="company" {...f.company} autoComplete="organization" state={state} />
                   <div className="flex flex-col gap-3.5 sm:flex-row sm:gap-3">
-                    <Field name="usdot" label="USDOT / MC #" placeholder="1234567" state={state} />
-                    <Field name="driversNeeded" label="Drivers needed" placeholder="1 – 5" options={["1 – 5", "6 – 10", "11 – 25", "26+"]} state={state} />
+                    <Field name="usdot" {...f.usdot} state={state} />
+                    <Field name="driversNeeded" {...f.driversNeeded} options={driversNeededOptions} state={state} />
                   </div>
-                  <Field name="email" label="Work email" type="email" placeholder="you@company.com" autoComplete="email" state={state} />
+                  <Field name="email" {...f.workEmail} type="email" autoComplete="email" state={state} />
                 </>
               ) : (
                 <>
-                  <Field name="name" label="Full name" placeholder="e.g. John Smith" autoComplete="name" state={state} />
+                  <Field name="name" {...f.name} autoComplete="name" state={state} />
                   <div className="flex flex-col gap-3.5 sm:flex-row sm:gap-3">
-                    <Field name="phone" label="Phone" type="tel" placeholder="(555) 123-4567" autoComplete="tel" state={state} />
-                    <Field
-                      name="experience"
-                      label="CDL-A experience"
-                      placeholder="Select"
-                      options={["Less than 1 year", "1 – 2 years", "3 – 5 years", "5+ years"]}
-                      state={state}
-                    />
+                    <Field name="phone" {...f.phone} type="tel" autoComplete="tel" state={state} />
+                    <Field name="experience" {...f.experience} state={state} />
                   </div>
-                  <Field name="email" label="Email" type="email" placeholder="you@email.com" autoComplete="email" state={state} />
+                  <Field name="email" {...f.email} type="email" autoComplete="email" state={state} />
                 </>
               )}
             </div>
@@ -203,8 +204,7 @@ export function LeadForm() {
               // min-h (not a fixed height) so a very large text setting wraps into a taller button instead of clipping.
               className="btn-shine mt-[22px] inline-flex min-h-[52px] w-full items-center justify-center rounded-[10px] bg-amber px-4 py-2 text-center text-[15px] font-bold text-navy shadow-[0_8px_14px_rgba(245,165,36,0.35)] transition hover:-translate-y-px hover:bg-amber-hover disabled:cursor-wait disabled:opacity-70 sm:px-[26px] sm:text-base"
             >
-              {/*   keeps the arrow on the same line as the last word */}
-              {pending ? "Sending…" : type === "carrier" ? "Check My Carrier's Fit →" : "Apply to Drive →"}
+              {pending ? t.sending : type === "carrier" ? t.submitCarrier : t.submitDriver}
             </button>
             {state.status === "error" && (
               <p role="alert" className="mt-3 text-center text-[13px] text-[#d92d20]">
@@ -217,10 +217,10 @@ export function LeadForm() {
                 <path d="M8 11V7a4 4 0 0 1 8 0v4" />
               </svg>
               <span className="text-center">
-                {cta.form.privacy}{" "}
+                {t.privacy}{" "}
                 {/* nowrap so "Privacy Policy" never splits across two lines on phones */}
-                <Link href="/privacy" className="whitespace-nowrap underline underline-offset-2 hover:text-body">
-                  {cta.form.privacyLink}
+                <Link href={localePath(lang, "/privacy")} className="whitespace-nowrap underline underline-offset-2 hover:text-body">
+                  {t.privacyLink}
                 </Link>
               </span>
             </p>
