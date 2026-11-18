@@ -1,7 +1,7 @@
 import Image from "next/image";
-import logo from "../../../public/apg/logo-apg-solutions.jpg";
+import logo from "../../../public/apg/logo.svg";
 
-// Raster logo from the design (380×174). Scale proportionally.
+// Vector logo drawn by scripts/make-logo.py. Scale proportionally.
 export function Logo({ className = "", priority = false }: { className?: string; priority?: boolean }) {
   return <Image src={logo} alt="APG Solutions Inc." preload={priority} className={`h-auto object-contain ${className}`} />;
 }

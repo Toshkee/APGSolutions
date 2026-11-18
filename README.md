@@ -22,7 +22,7 @@ This branch (`apg-design`) implements the designer's APG Solutions landing page 
 - `public/share/`: link preview images. After changing the Spanish hero text, run `python3 scripts/make-share-image.py` to remake `og-es.jpg`
 - `src/components/apg/`: page sections (Nav, Hero, Stats, Problem, TwoSides, Benefits, HowItWorks, Pricing, DriverTypes, Faq, Cta + LeadForm, Footer)
 - `src/app/actions.ts`: lead form Server Action for carriers and drivers (sends email through Resend)
-- `public/apg/`: logo, hero photo and icons exported from Figma
+- `public/apg/`: logo and icons. The logo is drawn by `scripts/make-logo.py` (the client's only original was a small ChatGPT image), which also writes the full versions with the tagline to `brand/`
 
 ## Contact form
 

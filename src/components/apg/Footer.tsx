@@ -3,7 +3,7 @@ import { site } from "@/content/site";
 import { localePath, type Locale } from "@/i18n";
 import Image from "next/image";
 import Link from "next/link";
-import logoWhite from "../../../public/apg/logo-apg-solutions-white.png";
+import logoWhite from "../../../public/apg/logo-white.svg";
 
 export function Footer({ lang, t: footer, hours }: { lang: Locale; t: Dictionary["footer"]; hours: string }) {
   const to = (path: string) => localePath(lang, path);
@@ -14,7 +14,7 @@ export function Footer({ lang, t: footer, hours }: { lang: Locale; t: Dictionary
         <div className="flex flex-col gap-7 border-white/10 lg:flex-row lg:gap-12 lg:border-b lg:pb-14 xl:gap-20">
           <div className="flex flex-col gap-7 lg:w-[260px] lg:shrink-0 lg:gap-[22px] xl:w-[360px]">
             <Link href={to("/#top")} className="self-start" aria-label={footer.homeLabel}>
-              {/* White version of the logo, generated from the JPG until the designer sends a vector one */}
+              {/* White version of the logo (scripts/make-logo.py); its thin gaps are drawn in the footer navy */}
               <Image src={logoWhite} alt="APG Solutions Inc." className="h-auto w-[150px] lg:w-[180px]" />
             </Link>
             <p className="text-sm leading-[1.6] lg:text-[15px]">
